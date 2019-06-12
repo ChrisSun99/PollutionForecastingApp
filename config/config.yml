@@ -1,3 +1,16 @@
+# DB connection
+local_db:
+  host: "localhost"
+  user: "root"
+  passwd: "Smt19990513!"
+  db: "sample_db"
+
+remote_db:
+  host:
+  user:
+  passwd:
+  db:
+
 # params
 record_start_time: 2016050510
 record_end_time: 2019050513
