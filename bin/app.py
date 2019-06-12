@@ -1,5 +1,6 @@
 #!flask/bin/python
 import json
+import csv
 from flask import Flask, request, jsonify, redirect, url_for
 
 app = Flask(__name__)
@@ -7,29 +8,38 @@ app = Flask(__name__)
 
 @app.route('/success/<name>')
 def success(name):
-    return 'welcome %s' % name
+    return 'You selected: %s ' % name
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        user = request.form['nm']
-        searchword = request.args.get('key', '')
-        return redirect(url_for('success', name=user))
+        feature1 = request.form['nm']
+        feature2 = request.form['nmm']
+        fieldnames = ['feature1', 'feature2']
+
+        with open('nameList.csv', 'w') as inFile:
+
+            # dictionaries instead of having to add the csv manually.
+            writer = csv.DictWriter(inFile, fieldnames=fieldnames)
+
+            # writerow() will write a row in your csv file
+            writer.writerow({'feature1': feature1, 'feature2': feature2})
+
+        return redirect(url_for('success', name=feature1))
     else:
-        user = request.args.get('nm')
-        return redirect(url_for('success', name=user))
+        feature2 = request.args.get('nmm')
+        return redirect(url_for('success', name=feature2))
 
 
 @app.route('/requests', methods=['GET'])
 def get_request_by_query_parameter():
-    return 'name=' + request.args.get('name')
+    return request.args.get('feature1')
 
 
-@app.route('/requests', methods=['POST'])
-def post_request():
-    return str(request.get_json())
-
+# @app.route('/requests', methods=['POST'])
+# def post_request():
+#     return str(request.get_json())
 
 # @app.route('/data', methods=['POST'])
 # def f_data():
@@ -42,17 +52,4 @@ def post_request():
 
 if __name__ == '__main__':
     app.run(debug=False)  # app.run(host, port, debug, options)
-
-    client_input = post_request()
-
-    input_params = {
-        'client_input': {
-            'name': client_input
-        }
-    }
-
-    with open('../bin/client_input.pkl', 'w') as f:
-        json.dump(input_params, f)
-
-
 

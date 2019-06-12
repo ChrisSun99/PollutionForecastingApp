@@ -110,3 +110,18 @@ def initialize_nn_params(nn):
 	# nn.connect_2.weight.data = torch.rand(nn.output_size, nn.hidden_size[1])
 	# nn.connect_2.bias.data = torch.rand(nn.output_size)
 	return nn
+
+
+import json
+time = '2019-06-12'
+num = 2
+request_dict = {'time': time, 'num': num}
+request_js = json.dumps(request_dict)
+with open('../tmp/request.pkl', 'w') as f:
+	json.dump(request_dict, f)
+
+request_dict_2 = json.loads(request_js)
+
+with open('../tmp/request.pkl', 'r') as f:
+	request_dict_3 = json.load(f)
+

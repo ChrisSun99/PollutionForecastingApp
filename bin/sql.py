@@ -7,6 +7,9 @@ from mods import data_filtering
 import matplotlib.pylab as plt
 import seaborn as sns
 import sys
+import csv
+
+from bin import app
 
 sys.path.append('../')
 
@@ -24,8 +27,12 @@ cur = db.cursor()
 
 # Select data from table using SQL query.
 #cur.execute("SELECT * FROM beijing_cityhour")
+fields = pd.read_csv("../config/nameList.csv")
+data = [row for row in csv.reader(fields)]
 cursor = db.cursor(pymysql.cursors.DictCursor)
-cursor.execute("SELECT ptime, pm25, aqi FROM beijing_cityHour")
+feature1 = data[0][0]
+feature2 = data[1][0]
+cursor.execute("SELECT {}, pm25, {} FROM beijing_cityHour".format(feature1, feature2))
 result_set = cursor.fetchall()
 # for row in result_set:
 #     print("%s, %s, %s" % (row["ptime"], row["pm25"], row["aqi"]))
