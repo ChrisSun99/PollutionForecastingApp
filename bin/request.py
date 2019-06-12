@@ -1,6 +1,6 @@
 import urllib
 import json
-from config.app import * # 已经编写好的 app
+from bin.app import * # 已经编写好的 app
 
 
 def api_get(path, data):
