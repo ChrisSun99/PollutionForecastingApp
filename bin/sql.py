@@ -18,7 +18,7 @@ cur = db.cursor()
 cur.execute("SELECT * FROM beijing_cityhour")
 
 #Record the data
-data_bj = cur.fetchall()
+data_bj = list(cur.fetchall())
 cur.close()
 
 df_bj = pd.DataFrame(data_bj)
@@ -26,5 +26,5 @@ df_bj = pd.DataFrame(data_bj)
 # # print the first and second columns
 # # for row in data:
 # #     print(row[0], " ", row[1])
-# print(data)
+print(df_bj)
 # acf_pacf_test(beijing_cityhour, data);
