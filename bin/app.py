@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, redirect, url_for
 
 app = Flask(__name__)
 
-@app.route('/success')
+@app.route('/success/<name>')
 def success(name):
     return 'welcome %s' %name
 
