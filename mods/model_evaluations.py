@@ -60,4 +60,3 @@ def r2(time_series_0, time_series_1):
 	"""
 	return r2_score(time_series_0, time_series_1)
 
-

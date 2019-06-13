@@ -161,6 +161,7 @@ def build_train_targets_array():
 	return targets
 
 
+
 if __name__ == '__main__':
 	# 设定参数
 	selected_columns = config.conf['model_params']['selected_columns']
