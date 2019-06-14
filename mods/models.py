@@ -17,7 +17,7 @@ from mods.config_loader import config
 
 
 class ConvNet(nn.Module):
-    def __init__(self):
+    def __init__(self, num_classes=10):
         super(ConvNet, self).__init__()
         self.layer1 = nn.Sequential(
             nn.Conv2d(1, 32, kernel_size=5, stride=1, padding=2),

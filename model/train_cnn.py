@@ -30,9 +30,12 @@ if __name__ == "__main__":
     selected_columns = config.conf['model_params']['selected_columns']
     pred_dim = config.conf['model_params']['pred_dim']
     use_cuda = config.conf['model_params']['pred_use_cuda']
-    lr = config.conf['model_params']['lr']
-    n_epochs = config.conf['model_params']['epochs']
-    batch_size = config.conf['model_params']['batch_size']
+    #lr = config.conf['model_params']['lr']
+    lr = 0.001
+    #n_epochs = config.conf['model_params']['epochs']
+    n_epochs = 6
+    #batch_size = config.conf['model_params']['batch_size']
+    batch_size = 100
     n_test = pred_dim
     # for data split
 
@@ -47,17 +50,18 @@ if __name__ == "__main__":
 
     torch_dataset = Data.TensorDataset(torch.from_numpy(X_train), torch.from_numpy(y_train))
     loader = DataLoader(torch_dataset, batch_size=batch_size, shuffle=True)
+    # load = (weight, 32, 1, 5)
     if use_cuda:
-        train_loader = [(tx.cuda(), ty.cuda()) for (tx, ty) in loader]
+        loader = [(tx.cuda(), ty.cuda()) for (tx, ty) in loader]
 
-    # 构造测试集
-    train_samples_dict = build_train_samples_dict()
-    train_targets_arr = build_train_targets_array()
-
-    X_test = X_train[-1]
-    y_test = y_train
-    test_dataset = Data.TensorDataset(torch.from_numpy(X_test), torch.from_numpy(y_test))
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+    # # 构造测试集
+    # train_samples_dict = build_train_samples_dict()
+    # train_targets_arr = build_train_targets_array()
+    #
+    # X_test = X_train[-1]
+    # y_test = y_train
+    # test_dataset = Data.TensorDataset(torch.from_numpy(X_test), torch.from_numpy(y_test))
+    # test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
     # 定义模型
     model = models.ConvNet()
@@ -71,9 +75,11 @@ if __name__ == "__main__":
     loss_record = []
     acc_list = []
     for epoch in range(n_epochs):
-        for i, (images, labels) in enumerate(train_loader):
+        for i, (images, labels) in enumerate(loader):
             # Run the forward pass
+            print(images.shape, labels.shape)
             outputs = model(images)
+
             loss = criterion(outputs, labels)
             loss_record.append(loss.item())
 
@@ -93,18 +99,18 @@ if __name__ == "__main__":
                       .format(epoch + 1, n_epochs, i + 1, total_step, loss.item(),
                               (correct / total) * 100))
 
-    # Test the model
-    model.eval()
-    with torch.no_grad():
-        correct = 0
-        total = 0
-        for images, labels in test_loader:
-            outputs = model(images)
-            _, predicted = torch.max(outputs.data, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
-
-        print('Test Accuracy of the model on the 10000 test images: {} %'.format((correct / total) * 100))
+    # 测试模型
+    # model.eval()
+    # with torch.no_grad():
+    #     correct = 0
+    #     total = 0
+    #     for images, labels in test_loader:
+    #         outputs = model(images)
+    #         _, predicted = torch.max(outputs.data, 1)
+    #         total += labels.size(0)
+    #         correct += (predicted == labels).sum().item()
+    #
+    #     print('Test Accuracy of the model on the 10000 test images: {} %'.format((correct / total) * 100))
 
     # #保存模型
     # with open('../tmp/model_struc_params_cnn.pkl', 'w') as f:
