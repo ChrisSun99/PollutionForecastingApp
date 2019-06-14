@@ -1,16 +1,3 @@
-# DB connection
-local_db:
-  host: "localhost"
-  user: "root"
-  passwd: "Smt19990513!"
-  db: "sample_db"
-
-remote_db:
-  host:
-  user:
-  passwd:
-  db:
-
 # params
 record_start_time: 2016050510
 record_end_time: 2019050513
@@ -23,9 +10,9 @@ model_params:
     hr: 3600
     train_use_cuda: True
     pred_use_cuda: False
-    lr: 0.0002
-    epochs: 60000
-    batch_size: 128
+    lr: 0.001
+    epochs: 40000
+    batch_size: 2048
     pred_horizon_len: 8500
     pred_dim: 72
     target_column: 'pm25'
@@ -67,14 +54,14 @@ model_params:
         o3: 1 #5
         so2: 1 #8
     acf_lags:
-        pm25: 60
-        temp: 60 #13
-        sd: 60 #13
-        wd: 60 #32
-        weather: 60 #34
-        ws: 60 #14
-        pm10: 60
-        co: 60 #57
-        no2: 60 #33
-        o3: 60 #9
-        so2: 60 #36
+        pm25: 120
+        temp: 120 #13
+        sd: 120 #13
+        wd: 120 #32
+        weather: 120 #34
+        ws: 120 #14
+        pm10: 120
+        co: 120 #57
+        no2: 120 #33
+        o3: 120 #9
+        so2: 120 #36
