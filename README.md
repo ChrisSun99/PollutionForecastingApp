@@ -35,55 +35,66 @@
     |--models.py                        # 长短期记忆模型以及基于pytorch的神经网络训练和预测模型
     |--data_filtering.py                # 清理数据
     |--granger_causality.py             # 格兰杰检验
-    |--build_samples_and_targets.py     #运用流行学习对数据进行非线性降维，用更少的数据表示更多的信息 
-    |--extract_data_and_normalize.py    #清理异常值，缺省值并进行归一化
-    |--loss_criterion.py                #损失函数：平均百分比误差
-    |--model_evaluations.py             #误差值分析
+    |--build_samples_and_targets.py     # 运用流行学习对数据进行非线性降维，用更少的数据表示更多的信息 
+    |--extract_data_and_normalize.py    # 清理异常值，缺省值并进行归一化
+    |--loss_criterion.py                # 损失函数：平均百分比误差
+    |--model_evaluations.py             # 误差值分析
            
 |--model 
-    |--train_cnn.py
-    |--train_lstm.py                    #训练长短期记忆模型   
+    |--train_cnn.py                     # 训练卷积神经网络模型
+    |--train_lstm.py                    # 训练长短期记忆模型   
+    |--train_lstm_cnn.py                # 卷积和长短期记忆的结合模型 (还有bug) 
 |--other
     |--get_raw_data_and_normalize.py 
-    |--data_correlation_and_analysis.py #拉取天气数据并进行分析
+    |--data_correlation_and_analysis.py # 拉取天气数据并进行分析
 |--analysis 
-    |--acf_pacf_test.py                 #acf和pacf检验稳定性
-    |--correlation_analysis.py          #数据相关性分析
-    |--feature_importance.py            #特征重要性分析
-    |--granger_causality_test.py        #格兰杰检验
-|--tmp                                  #资源文档
+    |--acf_pacf_test.py                 # acf和pacf检验稳定性
+    |--correlation_analysis.py          # 数据相关性分析
+    |--feature_importance.py            # 特征重要性分析
+    |--granger_causality_test.py        # 格兰杰检验
+|--tmp                                  # 资源文档
 
 ```
 
 ### Documentation
 * config 
-    * record_start_time: '2016050510'   #数据起始时间
-    * record_end_time: '2019050513'     #数据结束时间
+    * record_start_time: '2016050510'   # 数据起始时间
+    * record_end_time: '2019050513'     # 数据结束时间
     * exist_record_time: '2018050513'   
-    * model_params                      #模型参数
+    * model_params                      # 模型参数
     * logging                           
 * mods
     * models.py                         
         * LSTM Model 
-            * `input_size`              #输入数据维度
-            * `batch_first`             #设定为True则使second dimension为seq_len
-            * `hidden_size`             #隐藏层层数
-            * `num_layers`              #神经网络层数
-    * data_filtering.py                 #平滑数据
-        * savitzky_golay_filtering()    #用线性最小二乘法把相邻数据点fit到低阶多项式 
-        * band_pass_filtering()         #带通滤波，去掉高频低频数据      
-    * build_test_samples_and_targets.py #构建LSTM模型样本
-    * granger_causality.py              #检验时间序列x是否是y的原因。x,y须具平稳性
+            * 参数
+                * `input_size`              # 输入数据维度
+                * `batch_first`             # 设定为True则使second dimension为seq_len
+                * `hidden_size`             # 隐藏层层数
+                * `num_layers`              # 神经网络层数
+        * CNN Model 
+            * 我们建立一个nn.Module的subclass, 建立一个两层的神经网络, 每一层有convolution + RELU + pooling的系列操作，由Conv2d方法调用。
+            * 参数
+                * `number_of_input_channels`    # 我们这里输入一段时间序列，因此是1
+                * `number_of_output_channels`   # 
+                * `kernel_size`                 # convolutional filter的大小，这里设置成5 * 5
+                * `padding_argument`            # ![](http://latex.codecogs.com/gif.latex?\\frac{1}{1+sin(x)})
+               
+            
+    * data_filtering.py                 # 平滑数据
+        * savitzky_golay_filtering()    # 用线性最小二乘法把相邻数据点fit到低阶多项式 
+        * band_pass_filtering()         # 带通滤波，去掉高频低频数据      
+    * build_test_samples_and_targets.py # 构建LSTM模型样本
+    * granger_causality.py              # 检验时间序列x是否是y的原因。x,y须具平稳性
 * model
     * train_lstm.py
         * 参数
-            * `target_column`           #预测数据列
-            * `selected columns`        #输入数据列
-            * `lr`                      #学习速率
-            * `pred_dim`                #输出数据维度
-            * `use_cuda`                #是否使用CUDA GPU 
-            * `batch_size`              #每个forward/backward pass中训练样本数量
-            * `epoch`                   #训练次数
+            * `target_column`           # 预测数据列
+            * `selected columns`        # 输入数据列
+            * `lr`                      # 学习速率
+            * `pred_dim`                # 输出数据维度
+            * `use_cuda`                # 是否使用CUDA GPU 
+            * `batch_size`              # 每个forward/backward pass中训练样本数量
+            * `epoch`                   # 训练次数
         * 优化器
             * 调用方法
               ``````
@@ -94,7 +105,18 @@
                     loss.backward()
                     optimizer.step()
              `````` 
-            * Adam算法                   #它利用梯度的一阶矩估计和二阶矩估计动态调整每个参数的学习率。它的优点主要在于经过偏置校正后，每一次迭代学习率都有个确定范围，使得参数比较平稳。
+            * Adam算法                   # 它利用梯度的一阶矩估计和二阶矩估计动态调整每个参数的学习率。它的优点主要在于经过偏置校正后，每一次迭代学习率都有个确定范围，使得参数比较平稳。
 
-
+    * train_cnn.py 
+        * 参数 
+            * `target_column`           # 预测数据列
+            * `selected columns`        # 输入数据列
+            * `lr`                      # 学习速率
+            * `pred_dim`                # 输出数据维度
+            * `use_cuda`                # 是否使用CUDA GPU 
+            * `batch_size`              # 每个forward/backward pass中训练样本数量
+            * `epoch`                   # 训练次数
+        * 算法概述
+            * 
+            
                                 
