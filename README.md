@@ -58,11 +58,11 @@
 
 ### Documentation
 * config 
-    * record_start_time: '2016050510'   # 数据起始时间
-    * record_end_time: '2019050513'     # 数据结束时间
-    * exist_record_time: '2018050513'   
-    * model_params                      # 模型参数
-    * logging                           
+    * `record_start_time`: '2016050510'   # 数据起始时间
+    * `record_end_time`: '2019050513'     # 数据结束时间
+    * `exist_record_time`: '2018050513'   
+    * `model_params`                      # 模型参数
+    * `logging`                           
 * mods
     * models.py                         
         * LSTM Model 
@@ -77,7 +77,7 @@
                 * `number_of_input_channels`    # 我们这里输入一段时间序列，因此是1
                 * `number_of_output_channels`   # 
                 * `kernel_size`                 # convolutional filter的大小，这里设置成5 * 5
-                * `padding_argument`            # ![](http://latex.codecogs.com/gif.latex?\\W_out=frac{W_in-F+2P}{S}+1)
+                * `padding_argument`            # ![](http://latex.codecogs.com/gif.latex?\\\Wout=\frac{Win-F+2P}{S}+1)
                
             
     * data_filtering.py                 # 平滑数据
