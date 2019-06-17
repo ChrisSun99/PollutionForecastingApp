@@ -72,14 +72,19 @@
                 * `hidden_size`             # 隐藏层层数
                 * `num_layers`              # 神经网络层数
         * CNN Model 
-            * 我们建立一个nn.Module的subclass, 建立一个两层的神经网络, 每一层有convolution + RELU + pooling的系列操作，由Conv2d方法调用。
+            * 我们建立一个nn.Module的subclass, 建立一个两层的神经网络, 每一层有convolution + RELU + pooling的系列操作，
+            由Conv2d方法调用。两层建立方式相同，除了layer2的input_size = 32, output_size = 64.
             * 参数
                 * `number_of_input_channels`    # 我们这里输入一段时间序列，因此是1
                 * `number_of_output_channels`   # 
                 * `kernel_size`                 # convolutional filter的大小，这里设置成5 * 5
-                * `padding_argument`            # ![](http://latex.codecogs.com/gif.latex?\\\Wout=\frac{Win-F+2P}{S}+1)
-               
-            
+                * `padding_argument`            
+                    # ![](http://latex.codecogs.com/gif.latex?\\\Wout=\frac{Win-F+2P}{S}+1), 
+                    # `Win`表示输入数据的宽度，`F`表示filter的大小，`P`表示Padding, `S`是步幅(Stride).我们使input和output大小相同，
+                    S= 1, F = 5, 所以P = 2, 即padding argument. 
+                    
+                
+                        
     * data_filtering.py                 # 平滑数据
         * savitzky_golay_filtering()    # 用线性最小二乘法把相邻数据点fit到低阶多项式 
         * band_pass_filtering()         # 带通滤波，去掉高频低频数据      
@@ -118,6 +123,9 @@
             * `batch_size`              # 每个forward/backward pass中训练样本数量
             * `epoch`                   # 训练次数
         * 算法概述
-            * 
+            * 在训练过程中,我们重复两个循环。外循环循环`n_epoch`次，内循环循环`trainloader`.通过神经网络后，我们得到输出数据，并计算loss.
+            然后我们进行back-propagation和一个optimized training step. 我们先通过调用`zero_grad()`让gradients归零，然后调用`backward()`
+            进行back-propagation.此时我们已经计算了gradients.我们需要调用`optimizer.step()`进行Adam optimizer training step.
+            
             
                                 
