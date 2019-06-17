@@ -41,6 +41,7 @@
     |--model_evaluations.py             #误差值分析
            
 |--model 
+    |--train_cnn.py
     |--train_lstm.py                    #训练长短期记忆模型   
 |--other
     |--get_raw_data_and_normalize.py 

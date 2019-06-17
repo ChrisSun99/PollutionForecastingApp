@@ -4,9 +4,9 @@ from torch import nn
 import torch.utils.data as Data
 from torch.utils.data import DataLoader
 from mods import models
+
 from mods.build_samples_and_targets import build_train_samples_dict, build_train_targets_array
 import json
-
 import sys
 
 sys.path.append('../')
@@ -83,9 +83,6 @@ if __name__ == "__main__":
 
     # 构建训练和验证数据集
     trainloader, verifyloader, X_train, y_train, X_verify, y_verify = build_train_and_verify_datasets()
-    print("x_train: ",  X_train.shape ,"y_train: ", y_train.shape)
-    print("x_verify: ", X_verify.shape, "y_verify: ",  y_verify.shape)
-
 
 
     # 定义模型
@@ -96,38 +93,71 @@ if __name__ == "__main__":
 
 
     # 设定优化器
-    #criterion = nn.CrossEntropyLoss()
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
     # Train the model
     total_step = len(trainloader)
-    verify_loss_record = []
-    train_loss_record = []
+    loss_list = []
     acc_list = []
     for epoch in range(n_epochs):
-        # 训练集
-        for train_x, train_y in trainloader:
-            input_weights = alpha_layer(train_x)[:, :, 0]
-            output_weights = weights_layer(input_weights)
+        for i, (train_x, train_y) in enumerate(trainloader):
+            # Run the forward pass
             train_x = train_x.unsqueeze(1)
             train_out = model(train_x)
-            train_out = train_out[:, -pred_dim:, 0]
-            train_loss = criterion(torch.mul(train_out, output_weights), train_y[:, :, 0])
-            optimizer.zero_grad()
-            train_loss.backward()
-            optimizer.step()
-        train_loss_record.append(train_loss)
+            #train_out = outputs[:, -pred_dim:, 0]
+            train_y = train_y[:, :10, :]
+            print(train_out.shape, train_y.shape)
 
-        # 验证集
-        with torch.no_grad():
-            for verify_x, verify_y in verifyloader:
-                input_weights = models.alpha_layer(verify_x)[:, :, 0]
-                output_weights = models.weights_layer(input_weights)
-                cnn_verify_out = model(verify_x)
-                cnn_verify_out = cnn_verify_out[:, -pred_dim:, 0]
-                verify_loss = criterion(torch.mul(cnn_verify_out, output_weights), verify_y[:, :, 0])
-            verify_loss_record.append(verify_loss)
+            loss = criterion(train_out, train_y[:, :, 0])
+            loss_list.append(loss.item())
+
+            # Backprop and perform Adam optimisation
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            # Track the accuracy
+            total = train_out.size()
+            _, predicted = torch.max(train_out.data, 1)
+            correct = (predicted == np.long(train_y)).sum().item()
+            acc_list.append(correct / total)
+
+            if (i + 1) % 100 == 0:
+                print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}%'
+                      .format(epoch + 1, n_epochs, i + 1, total_step, loss.item(),
+                              (correct / total) * 100))
+
+    # # Train the model
+    # total_step = len(trainloader)
+    # verify_loss_record = []
+    # train_loss_record = []
+    # acc_list = []
+    # for epoch in range(n_epochs):
+    #     # 训练集
+    #     for train_x, train_y in trainloader:
+    #         input_weights = alpha_layer(train_x)[:, :, 0]
+    #         output_weights = weights_layer(input_weights)
+    #         train_x = train_x.unsqueeze(1)
+    #         print("train_x: ", train_x.shape)
+    #         train_out = model(train_x)
+    #         #train_out = train_out[:, -pred_dim:, 0]
+    #         print(train_out.shape, output_weights.shape)
+    #         train_loss = criterion(torch.mul(train_out, output_weights), train_y[:, :, 0])
+    #         optimizer.zero_grad()
+    #         train_loss.backward()
+    #         optimizer.step()
+    #     train_loss_record.append(train_loss)
+    #
+    #     # 验证集
+    #     with torch.no_grad():
+    #         for verify_x, verify_y in verifyloader:
+    #             input_weights = models.alpha_layer(verify_x)[:, :, 0]
+    #             output_weights = models.weights_layer(input_weights)
+    #             cnn_verify_out = model(verify_x)
+    #             cnn_verify_out = cnn_verify_out[:, -pred_dim:, 0]
+    #             verify_loss = criterion(torch.mul(cnn_verify_out, output_weights), verify_y[:, :, 0])
+    #         verify_loss_record.append(verify_loss)
     # 测试模型
     # model.eval()
     # with torch.no_grad():

@@ -18,7 +18,7 @@ class ConvLSTMCell(nn.Module):
     def __init__(self, input_channels, hidden_channels, kernel_size):
         super(ConvLSTMCell, self).__init__()
 
-        assert hidden_channels % 2 == 0
+
 
         self.input_channels = input_channels
         self.hidden_channels = hidden_channels
@@ -50,19 +50,17 @@ class ConvLSTMCell(nn.Module):
 
     def init_hidden(self, batch_size, hidden, shape):
         if self.Wci is None:
-            self.Wci = Variable(torch.zeros(1, hidden, shape[0], shape[1])).cuda()
-            self.Wcf = Variable(torch.zeros(1, hidden, shape[0], shape[1])).cuda()
-            self.Wco = Variable(torch.zeros(1, hidden, shape[0], shape[1])).cuda()
+            self.Wci = Variable(torch.zeros(1, hidden, shape[0], shape[1]))
+            self.Wcf = Variable(torch.zeros(1, hidden, shape[0], shape[1]))
+            self.Wco = Variable(torch.zeros(1, hidden, shape[0], shape[1]))
         else:
             assert shape[0] == self.Wci.size()[2], 'Input Height Mismatched!'
             assert shape[1] == self.Wci.size()[3], 'Input Width Mismatched!'
-        return (Variable(torch.zeros(batch_size, hidden, shape[0], shape[1])).cuda(),
-                Variable(torch.zeros(batch_size, hidden, shape[0], shape[1])).cuda())
+        return (Variable(torch.zeros(batch_size, hidden, shape[0], shape[1])),
+                Variable(torch.zeros(batch_size, hidden, shape[0], shape[1])))
 
 
 class ConvLSTM(nn.Module):
-    # input_channels corresponds to the first input feature map
-    # hidden state is a list of succeeding lstm layers.
     def __init__(self, input_channels, hidden_channels, kernel_size, step=1, effective_step=[1]):
         super(ConvLSTM, self).__init__()
         self.input_channels = [input_channels] + hidden_channels
@@ -83,8 +81,8 @@ class ConvLSTM(nn.Module):
         outputs = []
         for step in range(self.step):
             x = input
+            print(x.shape)
             for i in range(self.num_layers):
-                # all cells are initialized in the first step
                 name = 'cell{}'.format(i)
                 if step == 0:
                     bsize, _, height, width = x.size()
@@ -120,9 +118,7 @@ class ConvNet(nn.Module):
 
     def forward(self, x):
         out = self.layer1(x)
-        print('x before linear layer: ', x.shape)
         out = self.layer2(out)
-        print('x before linear layer: ', out.shape)
         out = out.reshape(out.size(0), -1)
         out = self.drop_out(out)
         out = self.fc1(out)
