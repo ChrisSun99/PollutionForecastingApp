@@ -79,8 +79,8 @@
                 * `number_of_output_channels`   # 
                 * `kernel_size`                 # convolutional filter的大小，这里设置成5 * 5
                 * `padding_argument`            
-                    # ![](http://latex.codecogs.com/gif.latex?\\\Wout=\frac{Win-F+2P}{S}+1), 
-                    # `Win`表示输入数据的宽度，`F`表示filter的大小，`P`表示Padding, `S`是步幅(Stride).我们使input和output大小相同，
+                    ![](http://latex.codecogs.com/gif.latex?\\\Wout=\frac{Win-F+2P}{S}+1)
+                    `Win`表示输入数据的宽度，`F`表示filter的大小，`P`表示Padding, `S`是步幅(Stride).我们使input和output大小相同，
                     S= 1, F = 5, 所以P = 2, 即padding argument. 
                     
                 
