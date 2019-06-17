@@ -77,7 +77,7 @@
                 * `number_of_input_channels`    # 我们这里输入一段时间序列，因此是1
                 * `number_of_output_channels`   # 
                 * `kernel_size`                 # convolutional filter的大小，这里设置成5 * 5
-                * `padding_argument`            # ![](http://latex.codecogs.com/gif.latex?\\frac{1}{1+sin(x)})
+                * `padding_argument`            # ![](http://latex.codecogs.com/gif.latex?\\W_out=frac{W_in-F+2P}{S}+1)
                
             
     * data_filtering.py                 # 平滑数据
@@ -105,7 +105,8 @@
                     loss.backward()
                     optimizer.step()
              `````` 
-            * Adam算法                   # 它利用梯度的一阶矩估计和二阶矩估计动态调整每个参数的学习率。它的优点主要在于经过偏置校正后，每一次迭代学习率都有个确定范围，使得参数比较平稳。
+            * Adam算法    # 它利用梯度的一阶矩估计和二阶矩估计动态调整每个参数的学习率。它的优点主要在于经过偏置校正后，
+            每一次迭代学习率都有个确定范围，使得参数比较平稳。
 
     * train_cnn.py 
         * 参数 
