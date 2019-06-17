@@ -102,6 +102,7 @@ if __name__ == "__main__":
         for i, (train_x, train_y) in enumerate(trainloader):
             # Run the forward pass
             train_x = train_x.unsqueeze(1)
+            print(train_x.shape)
             train_out = model(train_x)
             # train_out = outputs[:, -pred_dim:, 0]
             train_y = train_y[:, :10, :]
