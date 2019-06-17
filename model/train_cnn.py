@@ -114,18 +114,9 @@ if __name__ == "__main__":
             loss.backward()
             optimizer.step()
 
-            # 准确率
-            total = train_out.size(0)
-            #_, predicted = torch.max(train_out.data, 1)
-            predicted = train_out.data
-            print(predicted.shape, train_y.shape)
-            correct = (predicted == train_y[:, :, 0]).sum().item()
-            acc_list.append(correct / total)
-
         if epoch % 2 == 0:
-            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}%'
-                  .format(epoch + 1, n_epochs, i + 1, total_step, loss.item(),
-                          (correct / total) * 100))
+            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'
+                  .format(epoch + 1, n_epochs, i + 1, total_step, loss.item()))
 
     # 验证集
     with torch.no_grad():
@@ -143,7 +134,7 @@ if __name__ == "__main__":
     #     json.dump(model, f)
     #
     # # 保存损失函数记录
-    # with open('../tmp/train_loss.pkl', 'w') as f:
+    # with open('../tmp/cnn_train_loss.pkl', 'w') as f:
     #     json.dump(loss_record, f)
     #
     #
