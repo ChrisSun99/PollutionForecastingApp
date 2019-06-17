@@ -105,7 +105,6 @@ if __name__ == "__main__":
             train_out = model(train_x)
             # train_out = outputs[:, -pred_dim:, 0]
             train_y = train_y[:, :10, :]
-
             loss = criterion(train_out, train_y[:, :, 0])
             loss_list.append(loss.item())
 
@@ -114,20 +113,18 @@ if __name__ == "__main__":
             loss.backward()
             optimizer.step()
 
+        # 验证集
+        with torch.no_grad():
+            for i, (verify_x, verify_y) in enumerate(verifyloader):
+                verify_x = verify_x.unsqueeze(1)
+                cnn_verify_out = model(verify_x)
+                verify_y = verify_y[:, :10, :]
+                verify_loss = criterion(cnn_verify_out, verify_y[:, :, 0])
+            verify_loss_record.append(verify_loss)
+
         if epoch % 2 == 0:
-            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'
-                  .format(epoch + 1, n_epochs, i + 1, total_step, loss.item()))
-
-    # 验证集
-    with torch.no_grad():
-        for verify_x, verify_y in verifyloader:
-            cnn_verify_out = model(verify_x)
-            cnn_verify_out = cnn_verify_out[:, -pred_dim:, 0]
-            verify_loss = criterion(cnn_verify_out, verify_y[:, :, 0])
-        verify_loss_record.append(verify_loss)
-
-        print('Test Accuracy of the model on the 10000 test images: {} %'.format((correct / total) * 100))
-
+            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Verify Loss: {:.4f}'
+                  .format(epoch + 1, n_epochs, i + 1, total_step, loss.item(), verify_loss))
 
     # #保存模型
     # with open('../tmp/model_struc_params_cnn.pkl', 'w') as f:
