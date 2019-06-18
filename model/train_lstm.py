@@ -31,9 +31,9 @@ def save_models_and_records(train_loss_record, verify_loss_record, lstm, alpha_l
     train_loss_list = [float(p.detach().cpu().numpy()) for p in train_loss_record]
     verify_loss_list = [float(p.cpu().numpy()) for p in verify_loss_record]
 
-    with open('../tmp/train_loss.pkl', 'w') as f:
+    with open('../tmp/lstm_train_loss.pkl', 'w') as f:
         json.dump(train_loss_list, f)
-    with open('../tmp/verify_loss.pkl', 'w') as f:
+    with open('../tmp/lstm_verify_loss.pkl', 'w') as f:
         json.dump(verify_loss_list, f)
 
     # 保存模型文件

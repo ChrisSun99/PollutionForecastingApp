@@ -4,8 +4,6 @@ from torch import nn
 import torch.utils.data as Data
 from torch.utils.data import DataLoader
 from mods import models
-
-from mods.build_samples_and_targets import build_train_samples_dict, build_train_targets_array
 import json
 import sys
 
@@ -60,6 +58,35 @@ def build_train_and_verify_datasets():
     return trainloader, verifyloader, X_train, y_train, X_verify, y_verify
 
 
+def save_models_and_records(train_loss_record, verify_loss_record, model):
+    # 参数
+    target_column = config.conf['model_params']['target_column']
+
+    # 损失函数记录
+    train_loss_list = [float(p.detach().cpu().numpy()) for p in train_loss_record]
+    verify_loss_list = [float(p.cpu().numpy()) for p in verify_loss_record]
+
+    with open('../tmp/cnn_train_loss.pkl', 'w') as f:
+        json.dump(train_loss_list, f)
+    with open('../tmp/cnn_verify_loss.pkl', 'w') as f:
+        json.dump(verify_loss_list, f)
+
+    # 保存模型文件
+    torch.save(model.state_dict(), '../tmp/cnn_state_dict_{}.pth'.format(target_column))
+
+    # 保存模型结构参数
+    cnn_model_struc_params = {
+        'cnn': {
+            'batch_size': model.batch_size,
+            'learning_rate': model.lr,
+            'epoch': model.n_epochs
+        }
+    }
+
+    with open('../tmp/cnn_model_struc_params.pkl', 'w') as f:
+        json.dump(cnn_model_struc_params, f)
+
+
 if __name__ == "__main__":
     # 设定参数
     target_column = config.conf['model_params']['target_column']
@@ -85,9 +112,6 @@ if __name__ == "__main__":
 
     # 定义模型
     model = models.ConvNet()
-    input_size = X_train.shape[2]
-    alpha_layer = models.AlphaLayer(input_size)
-    weights_layer = models.WeightsLayer(X_train.shape[1], y_train.shape[1])
 
     # 设定优化器
     criterion = nn.MSELoss()
@@ -95,9 +119,8 @@ if __name__ == "__main__":
 
     # Train the model
     total_step = len(trainloader)
-    loss_list = []
+    train_loss_record = []
     verify_loss_record = []
-    acc_list = []
     for epoch in range(n_epochs):
         for i, (train_x, train_y) in enumerate(trainloader):
             # Run the forward pass
@@ -105,12 +128,12 @@ if __name__ == "__main__":
             train_out = model(train_x)
             # train_out = outputs[:, -pred_dim:, 0]
             train_y = train_y[:, :10, :]
-            loss = criterion(train_out, train_y[:, :, 0])
-            loss_list.append(loss.item())
+            train_loss = criterion(train_out, train_y[:, :, 0])
+            train_loss_record.append(train_loss.item())
 
             # Back-propagation and perform Adam optimization
             optimizer.zero_grad()
-            loss.backward()
+            train_loss.backward()
             optimizer.step()
 
         # 验证集
@@ -124,14 +147,7 @@ if __name__ == "__main__":
 
         if epoch % 2 == 0:
             print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Verify Loss: {:.4f}'
-                  .format(epoch + 1, n_epochs, i + 1, total_step, loss.item(), verify_loss))
+                  .format(epoch + 1, n_epochs, i + 1, total_step, train_loss.item(), verify_loss))
 
-    # #保存模型
-    # with open('../tmp/model_struc_params_cnn.pkl', 'w') as f:
-    #     json.dump(model, f)
-    #
-    # # 保存损失函数记录
-    # with open('../tmp/cnn_train_loss.pkl', 'w') as f:
-    #     json.dump(loss_record, f)
-    #
-    #
+    # 保存模型
+    #save_models_and_records(train_loss_record, verify_loss_record, model)

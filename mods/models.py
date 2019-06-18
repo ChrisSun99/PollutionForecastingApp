@@ -10,6 +10,7 @@ import sys
 import numpy as np
 import torch
 from torch import nn
+
 sys.path.append('../')
 from torch.autograd import Variable
 
@@ -97,8 +98,10 @@ class ConvLSTM(nn.Module):
 
         return outputs, (x, new_c)
 
+
 class ConvNet(nn.Module):
     """cnn模型"""
+
     def __init__(self):
         super(ConvNet, self).__init__()
         self.layer1 = nn.Sequential(
