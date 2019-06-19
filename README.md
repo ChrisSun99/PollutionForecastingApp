@@ -41,6 +41,7 @@
     |--model_evaluations.py             # 误差值分析
            
 |--model 
+    |--train_rnn.py                     # 训练循环神经网络模型
     |--train_cnn.py                     # 训练卷积神经网络模型
     |--train_lstm.py                    # 训练长短期记忆模型   
     |--train_lstm_cnn.py                # 卷积和长短期记忆的结合模型 (还有bug) 
