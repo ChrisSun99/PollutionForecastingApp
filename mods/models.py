@@ -17,6 +17,7 @@ sys.path.append('../')
 
 class BaseModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, cell, num_layers, use_cuda):
+        super(BaseModel, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.output_size = output_size
@@ -38,7 +39,7 @@ class RNN(BaseModel):
 
     def forward(self, x):
         batch_size = x.size(0)
-        h0 = Variable(torch.zeros(self.num_layers * 1, batch_size, self.hidden_size))
+        h0 = Variable(torch.zeros(self.num_layers * 11, batch_size, self.hidden_size))
         # if self.use_cuda:
         #     h0 = h0.cuda()
         rnn_output, hn = self.cell(x, h0)

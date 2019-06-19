@@ -100,8 +100,6 @@ if __name__ == "__main__":
     n_epochs = 6
     # batch_size = config.conf['model_params']['batch_size']
     batch_size = 100
-    n_test = pred_dim
-    # for data split
 
     # 载入训练样本和目标数据集
     train_samples_dict = build_train_samples_dict()

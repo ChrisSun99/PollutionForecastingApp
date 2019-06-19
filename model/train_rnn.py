@@ -64,9 +64,6 @@ if __name__ == "__main__":
     # n_epochs = config.conf['model_params']['epochs']
     n_epochs = 6
     # batch_size = config.conf['model_params']['batch_size']
-    batch_size = 100
-    n_test = pred_dim
-    # for data split
 
     # 载入训练样本和目标数据集
     train_samples_dict = build_train_samples_dict()
@@ -76,7 +73,7 @@ if __name__ == "__main__":
     trainloader, verifyloader, X_train, y_train, X_verify, y_verify = build_train_and_verify_datasets()
 
     # 构建模型
-    model = models.RNN(input_size=1, hidden_size=64, output_size=1, num_layers=1, use_cuda=False)
+    model = models.RNN(input_size=1, hidden_size=64, output_size=1, cell="RNN", num_layers=1, use_cuda=False)
 
     # 设定优化器
     criterion = nn.MSELoss()
@@ -92,13 +89,10 @@ if __name__ == "__main__":
 
             # Run the forward pass
             optimizer.zero_grad()
-
             pred = model.forward(train_x)
             train_y = train_y[:, :10, :]
-            train_loss = criterion(pred, train_y[:, :, 0])
+            train_loss = criterion(pred, train_y)
             train_loss_record.append(train_loss.item())
-
-
             lossSum += train_loss.item()
             if i % 10 == 0 and i != 0:
                 print("batch: %d , loss is:%f" % (i, lossSum / 10))
