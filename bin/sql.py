@@ -2,30 +2,24 @@
 import pymysql
 import pandas as pd
 import sys
+import tmp
 
 sys.path.append('../')
 
-from analysis import time_delayed_correlation_analysis
-import config
+from mods.config_loader import config
 
 pymysql.install_as_MySQLdb()
 
 db = pymysql.connect(
-    host=config.conf['pymysql']['host'],  # your host
-    user=config.conf['pymysql']['user'],       # username
-    passwd=config.conf['pymysql']['passwd'],     # password
-    db=config.conf['pymysql']['db'])   # name of the database
+    host=config.conf['pymysql']['host'],            # your host
+    user=config.conf['pymysql']['user'],            # username
+    passwd=config.conf['pymysql']['passwd'],        # password
+    db=config.conf['pymysql']['db'])                # name of the database
 
 # Create a Cursor object to execute queries.
-cursor = db.cursor()
-cursor.exucute("UPDATE table SET time_stamp = TIMESTAMP(CURDATE(), time)")
+cursor = db.cursor(pymysql.cursors.DictCursor)
 cursor.execute("SELECT * FROM taiyuan_cityHour")
 # cursor.execute("SELECT {}, pm25, {} FROM taiyuan_cityHour".format(feature1, feature2))
 result_set = cursor.fetchall()
-
 cursor.close()
 result = pd.DataFrame(list(result_set))
-
-NON_DER = ['aqi', ]
-df_new = time_delayed_correlation_analysis.df_derived_by_shift(result, 6, NON_DER)
-

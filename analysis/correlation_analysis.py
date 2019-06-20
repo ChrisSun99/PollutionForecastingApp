@@ -9,7 +9,6 @@ Created on Mon Oct  8 14:32:52 2018
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
 import sys
 
 sys.path.append('../')
@@ -92,9 +91,8 @@ if __name__ == '__main__':
     # 载入数据
     data = pd.read_csv('../tmp/total_implemented_normalized_data.csv')
     target_column = config.conf['model_params']['target_column']
-    #target_column = 'pm25'
     selected_columns = config.conf['model_params']['selected_columns']
-    #selected_columns = 'pm10'
+
 
     # 带通滤波
     # data = data[list(set([target_column] + selected_columns))]

@@ -18,10 +18,13 @@ sys.path.append('../')
 
 from mods.config_loader import config
 from bin import sql
+from analysis import time_delayed_correlation_analysis
 
 if __name__ == '__main__':
     # 载入数据
-    df_new = sql.result
+    result = sql.result
+    NON_DER = ['aqi', ]
+    df_new = time_delayed_correlation_analysis.df_derived_by_shift(result, 6, NON_DER)
 
     # Select data from table using SQL query.
     fields = pd.read_csv("../config/nameList.csv")
@@ -37,6 +40,7 @@ if __name__ == '__main__':
     """
     可视化
     """
+
     colormap = plt.cm.RdBu
     plt.figure(figsize=(15, 10))
     plt.title(u'6 days', y=1.05, size=16)
