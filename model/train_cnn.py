@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+
+@author: mengtisun
+
+使用多维数据构建cnn
+"""
 import numpy as np
 import torch
 from torch import nn

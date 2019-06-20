@@ -1,5 +1,8 @@
 """
-rnn模型
+
+@author: mengtisun
+
+使用多维数据构建rnn
 """
 import numpy as np
 import torch

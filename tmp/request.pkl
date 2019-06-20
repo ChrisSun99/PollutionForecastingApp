@@ -1,1 +1,1 @@
-{"time": "2019-06-12", "num": 2}
+{"feature1": "pm10", "feature2": "pm25"}

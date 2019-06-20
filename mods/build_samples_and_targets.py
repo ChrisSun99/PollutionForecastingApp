@@ -193,6 +193,31 @@ def build_train_targets_array():
     return targets
 
 
+def build_data_frame_for_correlation_analysis():
+    # 载入数据
+    data = sql.result
+
+    # 时间戳
+    data['time_stamp'] = data.loc[:, 'ptime'].apply(
+        lambda x: int(time.mktime(time.strptime(str(int(x)), "%Y%m%d%H"))))
+
+    # 分离类别数据
+    data = data.drop(["_class", "_id", "city", "itime", "regionId"], axis=1)
+    categorical_data = data.select_dtypes(exclude=['int', 'float'])
+    numerical_data = data.select_dtypes(include=["int", "float"])
+
+    # 对类别数据进行One-Hot Encoding
+    enc = ce.OneHotEncoder(return_df=True, handle_unknown="ignore")
+    res = pd.DataFrame(enc.fit_transform(categorical_data))
+
+    # 滤波
+    data = savitzky_golay_filtering(numerical_data)
+    data = data.loc[:, ~data.columns.duplicated()]
+    df = pd.concat([data, res], axis=0, ignore_index=True, sort=False)
+
+    return df
+
+
 if __name__ == '__main__':
     # 设定参数
     selected_columns = config.conf['model_params']['selected_columns']
