@@ -2,7 +2,6 @@
 import pymysql
 import pandas as pd
 import sys
-import tmp
 
 sys.path.append('../')
 

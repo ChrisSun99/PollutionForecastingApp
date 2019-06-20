@@ -10,7 +10,7 @@ import torch
 from torch import nn
 import torch.utils.data as Data
 from torch.utils.data import DataLoader
-from mods import models
+from trash import models
 import json
 import sys
 

@@ -9,9 +9,7 @@ import torch
 from torch import nn
 import torch.utils.data as Data
 from torch.utils.data import DataLoader
-from torch.autograd import Variable
-from mods import models
-import json
+from trash import models
 import sys
 
 sys.path.append('../')

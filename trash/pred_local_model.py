@@ -18,7 +18,7 @@ import sys
 sys.path.append('../')
 
 from mods.config_loader import config
-from mods.model_evaluations import rmse, smape, mae, r2
+from trash.model_evaluations import rmse, smape, mae, r2
 from trash.build_samples import build_test_samples_and_targets, build_targets_data_frame
 from mods.lstm_model import load_model
 

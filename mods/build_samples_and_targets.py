@@ -10,13 +10,12 @@ import pandas as pd
 import numpy as np
 import copy
 from scipy.ndimage.interpolation import shift
-from sklearn.preprocessing import OneHotEncoder
 import category_encoders as ce
 import sys
 
 sys.path.append('../')
 
-from mods.config_loader import config
+from trash.config_loader import config
 from mods.data_filtering import savitzky_golay_filtering
 from bin import sql
 

@@ -17,8 +17,8 @@ sys.path.append('../')
 
 from mods.config_loader import config
 from mods.build_samples_and_targets import build_train_samples_dict, build_train_targets_array
-from mods.loss_criterion import criterion
-from mods.models import LSTM, AlphaLayer, WeightsLayer, initialize_lstm_params, initialize_alpha_layer_params, \
+from trash.loss_criterion import criterion
+from trash.models import LSTM, AlphaLayer, WeightsLayer, initialize_lstm_params, initialize_alpha_layer_params, \
     initialize_weights_layer_params
 
 
