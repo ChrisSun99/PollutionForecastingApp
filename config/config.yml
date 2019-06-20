@@ -1,9 +1,16 @@
 # pymysql parameters
+#pymysql:
+#    host: "localhost"  # your host
+#    user: "root"       # username
+#    passwd: "Smt19990513!"     # password
+#    db: "sample_db"   # name of the database
+
 pymysql:
     host: "localhost"  # your host
     user: "root"       # username
-    passwd: "Smt19990513!"     # password
+    passwd: "m31428571"     # password
     db: "sample_db"   # name of the database
+
 
 # params
 record_start_time: 2016050510
