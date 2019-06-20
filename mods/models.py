@@ -39,7 +39,7 @@ class RNN(BaseModel):
 
     def forward(self, x):
         batch_size = x.size(0)
-        h0 = Variable(torch.zeros(self.num_layers * 11, batch_size, self.hidden_size))
+        h0 = Variable(torch.zeros(self.num_layers * 1, batch_size, self.hidden_size))
         # if self.use_cuda:
         #     h0 = h0.cuda()
         rnn_output, hn = self.cell(x, h0)

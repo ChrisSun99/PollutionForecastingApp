@@ -52,4 +52,3 @@ def get_request_by_query_parameter():
 
 if __name__ == '__main__':
     app.run(debug=False)  # app.run(host, port, debug, options)
-

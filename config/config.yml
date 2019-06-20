@@ -16,7 +16,7 @@ model_params:
     pred_horizon_len: 8500
     pred_dim: 72
     target_column: 'pm25'
-    selected_columns: ['temp', 'sd', 'wd', 'weather', 'ws', 'pm10', 'pm25', 'co', 'no2', 'o3', 'so2']
+    selected_columns: ['temp', 'sd', 'wd', 'ws', 'pm10', 'pm25', 'co', 'no2', 'o3', 'so2']
     variable_bounds:
         pm25: [0, 600]
         temp: [-50, 60]

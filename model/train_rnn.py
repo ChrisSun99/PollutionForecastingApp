@@ -85,10 +85,11 @@ if __name__ == "__main__":
     for i in range(n_epochs):
         for i, (train_x, train_y) in enumerate(trainloader):
 
-            #x, y = Variable(train_x), Variable(train_y)
+            # x, y = Variable(train_x), Variable(train_y)
 
             # Run the forward pass
             optimizer.zero_grad()
+            train_x = train_x[:, :, :1]
             pred = model.forward(train_x)
             train_y = train_y[:, :10, :]
             train_loss = criterion(pred, train_y)
