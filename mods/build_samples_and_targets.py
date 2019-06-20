@@ -18,6 +18,7 @@ sys.path.append('../')
 
 from mods.config_loader import config
 from mods.data_filtering import savitzky_golay_filtering
+from bin import sql
 
 
 def build_single_series_manifold(time_series, embed_dim, embed_lag, time_lag, direc=1):
@@ -97,7 +98,8 @@ def build_train_samples_dict():
     hr = config.conf['model_params']['hr']
 
     # 载入数据
-    data = pd.read_csv('../tmp/taiyuan_cityHour.csv')
+    # data = pd.read_csv('../tmp/taiyuan_cityHour.csv')
+    data = sql.result
 
     # 分离类别数据
     data = data.drop(["_class", "_id", "city", "itime", "regionId"], axis=1)

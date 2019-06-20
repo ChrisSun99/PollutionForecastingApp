@@ -1,55 +1,31 @@
 
 import pymysql
 import pandas as pd
-import numpy as np
-from analysis import time_delayed_correlation_analysis
-import matplotlib.pylab as plt
-import seaborn as sns
 import sys
-import csv
 
 sys.path.append('../')
+
+from analysis import time_delayed_correlation_analysis
+import config
 
 pymysql.install_as_MySQLdb()
 
 db = pymysql.connect(
-    host="localhost",  # your host
-    user="root",       # username
-    passwd="Smt19990513!",     # password
-    db="sample_db")   # name of the database
+    host=config.conf['pymysql']['host'],  # your host
+    user=config.conf['pymysql']['user'],       # username
+    passwd=config.conf['pymysql']['passwd'],     # password
+    db=config.conf['pymysql']['db'])   # name of the database
 
 # Create a Cursor object to execute queries.
-cur = db.cursor()
-
-# Select data from table using SQL query.
-#cur.execute("SELECT * FROM beijing_cityhour")
-fields = pd.read_csv("../config/nameList.csv")
-data = [row for row in csv.reader(fields)]
-cursor = db.cursor(pymysql.cursors.DictCursor)
-feature1 = data[0][0]
-feature2 = data[1][0]
-cursor.execute("SELECT {}, pm25, {} FROM beijing_cityHour".format(feature1, feature2))
+cursor = db.cursor()
+cursor.exucute("UPDATE table SET time_stamp = TIMESTAMP(CURDATE(), time)")
+cursor.execute("SELECT * FROM taiyuan_cityHour")
+# cursor.execute("SELECT {}, pm25, {} FROM taiyuan_cityHour".format(feature1, feature2))
 result_set = cursor.fetchall()
-# for row in result_set:
-#     print("%s, %s, %s" % (row["ptime"], row["pm25"], row["aqi"]))
-cur.close()
 
-result = pd.DataFrame(result_set)
+cursor.close()
+result = pd.DataFrame(list(result_set))
 
 NON_DER = ['aqi', ]
 df_new = time_delayed_correlation_analysis.df_derived_by_shift(result, 6, NON_DER)
 
-"""
-可视化
-"""
-colormap = plt.cm.RdBu
-plt.figure(figsize=(15, 10))
-plt.title(u'6 days', y=1.05, size=16)
-
-mask = np.zeros_like(df_new.corr())
-mask[np.triu_indices_from(mask)] = True
-
-svm = sns.heatmap(df_new.corr(), mask=mask, linewidths=0.1, vmax=1.0,
-                  square=True, cmap=colormap, linecolor='white', annot=True)
-
-plt.show()
