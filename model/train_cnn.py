@@ -10,17 +10,17 @@ import torch
 from torch import nn
 import torch.utils.data as Data
 from torch.utils.data import DataLoader
-from trash import models
+from mods import models
 import json
 import sys
 
 sys.path.append('../')
 
 from mods.config_loader import config
-from mods.build_samples import build_train_samples_dict, build_train_targets_array
+from mods.build_samples_and_targets import build_train_samples_dict, build_train_targets_array
 
 """
-A univariate CNN model: support multiple features or types of observation at each time step. 
+A Univariate CNN model: support multiple features or types of observation at each time step. 
 Params: 
 n_input: The number of lag observations to use as input to the model.
 n_filters: The number of parallel filters.
@@ -101,12 +101,9 @@ if __name__ == "__main__":
     pred_dim = config.conf['model_params']['pred_dim']
     # use_cuda = config.conf['model_params']['pred_use_cuda']
     use_cuda = False
-    # lr = config.conf['model_params']['lr']
-    lr = 0.001
-    # n_epochs = config.conf['model_params']['epochs']
-    n_epochs = 6
-    # batch_size = config.conf['model_params']['batch_size']
-    batch_size = 100
+    lr = config.conf['model_params']['lr']
+    n_epochs = config.conf['model_params']['epochs']
+    batch_size = config.conf['model_params']['batch_size']
 
     # 载入训练样本和目标数据集
     train_samples_dict = build_train_samples_dict()
@@ -128,6 +125,7 @@ if __name__ == "__main__":
     verify_loss_record = []
     for epoch in range(n_epochs):
         for i, (train_x, train_y) in enumerate(trainloader):
+            optimizer.zero_grad()
             # Run the forward pass
             train_x = train_x.unsqueeze(1)
             train_out = model(train_x)
@@ -137,7 +135,6 @@ if __name__ == "__main__":
             train_loss_record.append(train_loss.item())
 
             # Back-propagation and perform Adam optimization
-            optimizer.zero_grad()
             train_loss.backward()
             optimizer.step()
 
@@ -150,9 +147,8 @@ if __name__ == "__main__":
                 verify_loss = criterion(cnn_verify_out, verify_y[:, :, 0])
             verify_loss_record.append(verify_loss)
 
-        if epoch % 2 == 0:
-            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Verify Loss: {:.4f}'
-                  .format(epoch + 1, n_epochs, i + 1, total_step, train_loss.item(), verify_loss))
+        print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Verify Loss: {:.4f}'
+              .format(epoch + 1, n_epochs, i + 1, total_step, train_loss.item(), verify_loss))
 
     # 保存模型
-    #save_models_and_records(train_loss_record, verify_loss_record, model)
+    # save_models_and_records(train_loss_record, verify_loss_record, model)

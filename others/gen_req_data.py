@@ -20,13 +20,15 @@ def gen_req_data(start_time, end_time = ''):
 		'start_time': start_time,
 		'end_time': end_time
 	}
-	req_data = json.dumps(req_dict)
-	return req_data
+	with open('../tmp/request.pkl', 'w') as f:
+		json.dumps(req_dict)
+	return req_dict
 
 
 if __name__ == '__main__':
 	start_time = '2017010101'
-	req_data = gen_req_data(start_time)
+	end_time = '2018010101'
+	req_data = gen_req_data(start_time, end_time)
 	
 	
 	

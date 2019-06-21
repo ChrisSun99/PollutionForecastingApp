@@ -1,0 +1,1 @@
+{"lstm": {"input_size": 10}, "alpha_layer": {"features_num": 10}, "weights_layer": {"weights_num": 192, "output_size": 72}}

@@ -9,13 +9,13 @@ import torch
 from torch import nn
 import torch.utils.data as Data
 from torch.utils.data import DataLoader
-from trash import models
+from mods import models
 import sys
 
 sys.path.append('../')
 
 from mods.config_loader import config
-from mods.build_samples import build_train_samples_dict, build_train_targets_array
+from mods.build_samples_and_targets import build_train_samples_dict, build_train_targets_array
 
 
 def build_train_and_verify_datasets():
@@ -60,10 +60,9 @@ if __name__ == "__main__":
     pred_dim = config.conf['model_params']['pred_dim']
     # use_cuda = config.conf['model_params']['pred_use_cuda']
     use_cuda = False
-    # lr = config.conf['model_params']['lr']
-    lr = 0.001
+    lr = config.conf['model_params']['lr']
     # n_epochs = config.conf['model_params']['epochs']
-    n_epochs = 6
+    n_epochs = 10
     # batch_size = config.conf['model_params']['batch_size']
 
     # 载入训练样本和目标数据集

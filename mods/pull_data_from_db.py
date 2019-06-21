@@ -52,3 +52,4 @@ if __name__ == '__main__':
 
     # Result with end time.
     result_with_end = pull_data_from_db(db_config, '2016050603', '2016050723')
+

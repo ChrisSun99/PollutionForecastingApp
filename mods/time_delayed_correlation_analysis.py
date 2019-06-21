@@ -118,4 +118,3 @@ if __name__ == "__main__":
     
     # Correlation analysis.
     total_ccf_results = time_delayed_correlation()
-    

@@ -16,9 +16,9 @@ import sys
 sys.path.append('../')
 
 from mods.config_loader import config
-from mods.build_samples import build_train_samples_dict, build_train_targets_array
+from mods.build_samples_and_targets import build_train_samples_dict, build_train_targets_array
 from trash.loss_criterion import criterion
-from trash.models import LSTM, AlphaLayer, WeightsLayer, initialize_lstm_params, initialize_alpha_layer_params, \
+from mods.models import LSTM, AlphaLayer, WeightsLayer, initialize_lstm_params, initialize_alpha_layer_params, \
     initialize_weights_layer_params
 
 
@@ -137,9 +137,9 @@ if __name__ == '__main__':
     early_stop_steps = 200
     sum = torch.tensor(early_stop_steps - 50).int()
     stop_criterion = torch.tensor(1).byte()
-    if use_cuda:
-        sum = sum.cuda()
-        stop_criterion = stop_criterion.cuda()
+    # if use_cuda:
+    #     sum = sum.cuda()
+    #     stop_criterion = stop_criterion.cuda()
 
     for epoch in range(epochs):
         # 训练集

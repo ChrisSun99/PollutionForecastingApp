@@ -25,8 +25,8 @@ def build_data_frame_for_correlation_analysis(start_time, end_time):
 	:return:
 	"""
 	db_config = config.conf['db_config']
-	categorical_columns = config.conf['model_params']['categorical_columns']
-	numerical_columns = config.conf['model_params']['numerical_columns']
+	categorical_columns = config.conf['category_params']['categorical_columns']
+	numerical_columns = config.conf['category_params']['numerical_columns']
 	
 	# 载入数据
 	data = pull_data_from_db(db_config, start_time, end_time)
@@ -54,3 +54,5 @@ if __name__ == '__main__':
 	start_time = '2017010101'
 	end_time = '2017123123'
 	data = build_data_frame_for_correlation_analysis(start_time, end_time)
+
+
