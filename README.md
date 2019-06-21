@@ -25,6 +25,8 @@
     |--config.yml                       # 项目配置文件
 |--bin
     |--app.py                           # web服务代码
+    |--login.html                       # 用户请求输入网页
+    |--request.pkl                      # 用户请求参数json文件
 |--lib
     |--manifold_prediction.py           # 使用流形样本进行预测
 |--logs
@@ -35,22 +37,26 @@
     |--models.py                        # 长短期记忆模型以及基于pytorch的神经网络训练和预测模型
     |--data_filtering.py                # 清理数据
     |--granger_causality.py             # 格兰杰检验
+    |--build_samples.py                 # 生成处理后的数据框架
     |--build_samples_and_targets.py     # 运用流行学习对数据进行非线性降维，用更少的数据表示更多的信息 
     |--extract_data_and_normalize.py    # 清理异常值，缺省值并进行归一化
     |--loss_criterion.py                # 损失函数：平均百分比误差
     |--model_evaluations.py             # 误差值分析
+    |--pull_data_from_db.py             # 数据库接口
            
 |--model 
     |--train_cnn.py                     # 训练卷积神经网络模型
     |--train_lstm.py                    # 训练长短期记忆模型   
-    |--train_lstm_cnn.py                # 卷积和长短期记忆的结合模型 (还有bug) 
+    |--train_gru.py                     # GRU模型
+    |--train_rnn.py                     # 训练循环神经网络模型
 |--other
     |--get_raw_data_and_normalize.py 
+    |--get_req_data.py                  # 生成请求数据
     |--data_correlation_and_analysis.py # 拉取天气数据并进行分析
 |--analysis 
     |--acf_pacf_test.py                 # acf和pacf检验稳定性
     |--correlation_analysis.py          # 数据相关性分析
-    |--feature_importance.py            # 特征重要性分析
+    |--model_evaluation.py              # 模型训练结果评估
     |--granger_causality_test.py        # 格兰杰检验
 |--tmp                                  # 资源文档
 
