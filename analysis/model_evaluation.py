@@ -15,9 +15,9 @@ import sys
 sys.path.append('../')
 
 from mods.config_loader import config
-from trash.models import LSTM
+from mods.models import LSTM
 from mods.build_samples import build_train_samples_dict, build_train_targets_array
-from trash.model_evaluations import smape, mae, rmse, r2
+from mods.model_evaluations import smape, mae, rmse, r2
 
 
 if __name__ == '__main__':

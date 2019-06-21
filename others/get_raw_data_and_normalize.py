@@ -10,7 +10,7 @@ import sys
 
 sys.path.append('../')
 
-from trash.extract_data_and_normalize import extract_implemented_data
+from mods.extract_data_and_normalize import extract_implemented_data
 
 
 if __name__ == '__main__':

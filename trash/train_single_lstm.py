@@ -16,8 +16,8 @@ sys.path.append('../')
 
 from mods.config_loader import config
 from mods.build_samples import build_train_samples_dict, build_train_targets_array
-from trash.loss_criterion import criterion
-from trash.models import LSTM, initialize_lstm_params
+from mods.loss_criterion import criterion
+from mods.models import LSTM, initialize_lstm_params
 
 
 if __name__ == '__main__':

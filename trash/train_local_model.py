@@ -21,8 +21,8 @@ sys.path.append('../')
 from mods.lstm_model import NN, initialize_model_params
 from trash.build_samples import build_train_samples_and_targets, build_targets_data_frame
 from mods.config_loader import config
-from trash.loss_criterion import criterion
-from trash.model_evaluations import smape, mae, rmse, r2
+from mods.loss_criterion import criterion
+from mods.model_evaluations import smape, mae, rmse, r2
 
 
 def func(x):
