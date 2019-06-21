@@ -17,7 +17,7 @@ import sys
 sys.path.append('../')
 
 from mods.config_loader import config
-from mods.build_samples_and_targets import build_train_samples_dict, build_train_targets_array
+from mods.build_samples import build_train_samples_dict, build_train_targets_array
 
 """
 A univariate CNN model: support multiple features or types of observation at each time step. 
