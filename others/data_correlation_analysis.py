@@ -6,7 +6,6 @@ Created on Mon Oct  8 14:32:52 2018
 
 数据相关性分析和可视化
 """
-from sklearn.metrics import r2_score
 import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -17,12 +16,11 @@ import csv
 sys.path.append('../')
 
 from mods.config_loader import config
-from bin import sql
-from analysis import time_delayed_correlation_analysis
+from mods import time_delayed_correlation_analysis, pull_data_from_db
 
 if __name__ == '__main__':
     # 载入数据
-    result = sql.result
+    result = pull_data_from_db.result
     NON_DER = ['aqi', ]
     df_new = time_delayed_correlation_analysis.df_derived_by_shift(result, 6, NON_DER)
 

@@ -1,74 +1,93 @@
 # pymysql parameters
-pymysql:
+#pymysql:
+#    host: "localhost"  # your host
+#    user: "root"       # username
+#    passwd: "Smt19990513!"     # password
+#    db: "sample_db"   # name of the database
+
+db_config:
     host: "localhost"  # your host
     user: "root"       # username
-    passwd: "Smt19990513!"     # password
+    passwd: "m31428571"     # password
     db: "sample_db"   # name of the database
 
-# params
-record_start_time: 2016050510
-record_end_time: 2019050513
-exist_record_time: 2018050513
 
-
-# set model
+# model params
 model_params:
-    samples_len: 15000
-    hr: 3600
-    train_use_cuda: True
-    pred_use_cuda: False
-    lr: 0.001
-    epochs: 40000
-    batch_size: 2048
-    pred_horizon_len: 8500
-    pred_dim: 72
-    target_column: 'pm25'
-    selected_columns: ['temp', 'sd', 'wd', 'ws', 'pm10', 'pm25', 'co', 'no2', 'o3', 'so2']
-    variable_bounds:
-        pm25: [0, 600]
-        temp: [-50, 60]
-        sd: [0, 150]
-        wd: [0, 20]
-        weather: [0, 30]
-        ws: [0, 12]
-        pm10: [0, 2000]
-        co: [0, 30]
-        no2: [0, 500]
-        o3: [0, 500]
-        so2: [0, 800]
-    time_lags:
-        pm25: 0
-        temp: 0
-        sd: 1
-        wd: 2
-        weather: 0
-        ws: 3
-        pm10: 0
-        co: 0
-        no2: 3
-        o3: 3
-        so2: 1
-    embed_lags:  # corresponding to acf decreasing to 0.6
-        pm25: 1 #11
-        temp: 1 #6
-        sd: 1 #6
-        wd: 1 #4
-        weather: 1 #7
-        ws: 1 #6
-        pm10: 1 #11
-        co: 1 #9
-        no2: 1 #7
-        o3: 1 #5
-        so2: 1 #8
-    acf_lags:
-        pm25: 120
-        temp: 120 #13
-        sd: 120 #13
-        wd: 120 #32
-        weather: 120 #34
-        ws: 120 #14
-        pm10: 120
-        co: 120 #57
-        no2: 120 #33
-        o3: 120 #9
-        so2: 120 #36
+    categorical_columns: ['weather', 'wd']
+    numerical_columns: ['aqi', 'co', 'grade', 'no2', 'o3', 'o3H8', 'pm10', 'pm25', 'sd', 'so2', 'temp', 'ws']
+
+
+## params
+#record_start_time: 2016050510
+#record_end_time: 2019050513
+#exist_record_time: 2018050513
+#
+#
+## set model
+#model_params:
+#
+#
+#
+#
+#
+#
+#    samples_len: 15000
+#    hr: 3600
+#    train_use_cuda: True
+#    pred_use_cuda: False
+#    lr: 0.001
+#    epochs: 40000
+#    batch_size: 2048
+#    pred_horizon_len: 8500
+#    pred_dim: 72
+#    target_column: 'pm25'
+#    selected_columns: ['temp', 'sd', 'wd', 'ws', 'pm10', 'pm25', 'co', 'no2', 'o3', 'so2']
+#    variable_bounds:
+#        pm25: [0, 600]
+#        temp: [-50, 60]
+#        sd: [0, 150]
+#        wd: [0, 20]
+#        weather: [0, 30]
+#        ws: [0, 12]
+#        pm10: [0, 2000]
+#        co: [0, 30]
+#        no2: [0, 500]
+#        o3: [0, 500]
+#        so2: [0, 800]
+#    time_lags:
+#        pm25: 0
+#        temp: 0
+#        sd: 1
+#        wd: 2
+#        weather: 0
+#        ws: 3
+#        pm10: 0
+#        co: 0
+#        no2: 3
+#        o3: 3
+#        so2: 1
+#    embed_lags:  # corresponding to acf decreasing to 0.6
+#        pm25: 1 #11
+#        temp: 1 #6
+#        sd: 1 #6
+#        wd: 1 #4
+#        weather: 1 #7
+#        ws: 1 #6
+#        pm10: 1 #11
+#        co: 1 #9
+#        no2: 1 #7
+#        o3: 1 #5
+#        so2: 1 #8
+#    acf_lags:
+#        pm25: 120
+#        temp: 120 #13
+#        sd: 120 #13
+#        wd: 120 #32
+#        weather: 120 #34
+#        ws: 120 #14
+#        pm10: 120
+#        co: 120 #57
+#        no2: 120 #33
+#        o3: 120 #9
+#        so2: 120 #36

@@ -18,7 +18,7 @@ sys.path.append('../')
 
 from trash.build_samples import build_test_samples_and_targets
 from trash.pred_local_model import load_model
-from mods.config_loader import config
+from trash.config_loader import config
 
 
 if __name__ == '__main__':

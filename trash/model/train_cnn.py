@@ -1,23 +1,33 @@
+# -*- coding: utf-8 -*-
 """
 
 @author: mengtisun
 
-使用多维数据构建rnn
+使用多维数据构建cnn
 """
 import numpy as np
 import torch
 from torch import nn
 import torch.utils.data as Data
 from torch.utils.data import DataLoader
-from torch.autograd import Variable
-from mods import models
+from trash import models
 import json
 import sys
 
 sys.path.append('../')
 
 from mods.config_loader import config
-from mods.build_samples_and_targets import build_train_samples_dict, build_train_targets_array
+from mods.build_samples import build_train_samples_dict, build_train_targets_array
+
+"""
+A univariate CNN model: support multiple features or types of observation at each time step. 
+Params: 
+n_input: The number of lag observations to use as input to the model.
+n_filters: The number of parallel filters.
+n_kernel: The number of time steps considered in each read of the input sequence.
+n_epochs: The number of times to expose the model to the whole training dataset.
+n_batch: The number of samples within an epoch after which the weights are updated.
+"""
 
 
 def build_train_and_verify_datasets():
@@ -55,6 +65,35 @@ def build_train_and_verify_datasets():
     return trainloader, verifyloader, X_train, y_train, X_verify, y_verify
 
 
+def save_models_and_records(train_loss_record, verify_loss_record, model):
+    # 参数
+    target_column = config.conf['model_params']['target_column']
+
+    # 损失函数记录
+    train_loss_list = [float(p.detach().cpu().numpy()) for p in train_loss_record]
+    verify_loss_list = [float(p.cpu().numpy()) for p in verify_loss_record]
+
+    with open('../tmp/cnn_train_loss.pkl', 'w') as f:
+        json.dump(train_loss_list, f)
+    with open('../tmp/cnn_verify_loss.pkl', 'w') as f:
+        json.dump(verify_loss_list, f)
+
+    # 保存模型文件
+    torch.save(model.state_dict(), '../tmp/cnn_state_dict_{}.pth'.format(target_column))
+
+    # 保存模型结构参数
+    cnn_model_struc_params = {
+        'cnn': {
+            'batch_size': model.batch_size,
+            'learning_rate': model.lr,
+            'epoch': model.n_epochs
+        }
+    }
+
+    with open('../tmp/cnn_model_struc_params.pkl', 'w') as f:
+        json.dump(cnn_model_struc_params, f)
+
+
 if __name__ == "__main__":
     # 设定参数
     target_column = config.conf['model_params']['target_column']
@@ -67,6 +106,7 @@ if __name__ == "__main__":
     # n_epochs = config.conf['model_params']['epochs']
     n_epochs = 6
     # batch_size = config.conf['model_params']['batch_size']
+    batch_size = 100
 
     # 载入训练样本和目标数据集
     train_samples_dict = build_train_samples_dict()
@@ -75,35 +115,44 @@ if __name__ == "__main__":
     # 构建训练和验证数据集
     trainloader, verifyloader, X_train, y_train, X_verify, y_verify = build_train_and_verify_datasets()
 
-    # 构建模型
-    model = models.RNN(input_size=1, hidden_size=64, output_size=1, cell="RNN", num_layers=1, use_cuda=False)
+    # 定义模型
+    model = models.ConvNet()
 
     # 设定优化器
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
-    # 训练模型
+    # Train the model
+    total_step = len(trainloader)
     train_loss_record = []
     verify_loss_record = []
-    for i in range(n_epochs):
+    for epoch in range(n_epochs):
         for i, (train_x, train_y) in enumerate(trainloader):
-
-            # x, y = Variable(train_x), Variable(train_y)
-
             # Run the forward pass
-            optimizer.zero_grad()
-            train_x = train_x[:, :, :1]
-            pred = model.forward(train_x)
+            train_x = train_x.unsqueeze(1)
+            train_out = model(train_x)
+            # train_out = outputs[:, -pred_dim:, 0]
             train_y = train_y[:, :10, :]
-            train_loss = criterion(pred, train_y)
+            train_loss = criterion(train_out, train_y[:, :, 0])
             train_loss_record.append(train_loss.item())
-            lossSum += train_loss.item()
-            if i % 10 == 0 and i != 0:
-                print("batch: %d , loss is:%f" % (i, lossSum / 10))
-                train_loss_record.append(lossSum / 10)
-                lossSum = 0
 
+            # Back-propagation and perform Adam optimization
+            optimizer.zero_grad()
             train_loss.backward()
             optimizer.step()
 
-        print("%d epoch is finished!" % (i + 1))
+        # 验证集
+        with torch.no_grad():
+            for i, (verify_x, verify_y) in enumerate(verifyloader):
+                verify_x = verify_x.unsqueeze(1)
+                cnn_verify_out = model(verify_x)
+                verify_y = verify_y[:, :10, :]
+                verify_loss = criterion(cnn_verify_out, verify_y[:, :, 0])
+            verify_loss_record.append(verify_loss)
+
+        if epoch % 2 == 0:
+            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Verify Loss: {:.4f}'
+                  .format(epoch + 1, n_epochs, i + 1, total_step, train_loss.item(), verify_loss))
+
+    # 保存模型
+    #save_models_and_records(train_loss_record, verify_loss_record, model)

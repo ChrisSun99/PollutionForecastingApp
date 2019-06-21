@@ -13,7 +13,7 @@ import sys
 
 sys.path.append('../')
 
-from mods.granger_causality import granger_causality
+from trash.granger_causality import granger_causality
 from mods.config_loader import config
 from mods.data_filtering import savitzky_golay_filtering
 

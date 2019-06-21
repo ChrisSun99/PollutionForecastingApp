@@ -15,7 +15,6 @@ Created on Mon Oct  8 14:32:52 2018
 
 """
 import copy
-import time
 from scipy.ndimage.interpolation import shift
 import numpy as np
 import pandas as pd
@@ -24,7 +23,6 @@ import sys
 sys.path.append('../')
 
 from mods.config_loader import config
-from mods.data_filtering import savitzky_golay_filtering
 
 
 def build_single_dim_manifold(time_series, embed_dim, lag, time_lag, direc = 1):

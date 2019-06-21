@@ -151,20 +151,16 @@ def savitzky_golay_filtering(data, window_size = 11, order = 2):
 		data_filtered: pd.DataFrame, 滤波处理后的数据表, columns = [target_column, selected_columns_0, selected_column_1, ...]
 	"""
 	data_copy = copy.deepcopy(data)
-	# columns = list(set([config.conf['model_params']['target_column']] + config.conf['model_params']['selected_columns']))
 	columns = data_copy.columns
-	data_copy = data_copy[columns]
 	filtered_results = []
 	for column in columns:
 		y = np.array(data_copy.loc[:, column]).flatten()
-		y_filtered = savitzky_golay(y, window_size=window_size, order=order)
+		y_filtered = savitzky_golay(y, window_size = window_size, order = order)
 		filtered_results.append(y_filtered)
 	filtered_results = np.array(filtered_results).T
-	filtered_results = pd.DataFrame(filtered_results, columns=columns)
+	filtered_results = pd.DataFrame(filtered_results, columns = columns)
 	
-	data_filtered = pd.concat([data[['ptime']], filtered_results], axis=1, sort=False).reset_index(drop=True)
-	
-	return data_filtered
+	return filtered_results
 
 
 if __name__ == '__main__':
