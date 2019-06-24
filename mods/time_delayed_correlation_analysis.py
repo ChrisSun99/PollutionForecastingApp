@@ -1,6 +1,4 @@
 """
-Created on 2019/6/20 16:00
-@author: mengtisun
 
 时滞分析及相关性分析
 """
@@ -99,8 +97,10 @@ def time_delayed_correlation(half_range_len = 500):
                     )
                 peak_loc, peak_value = peak_loc_and_value([p[1] for p in cross_correlation_results])
                 total_ccf_results[columns[i]][columns[j]] = [peak_loc, peak_value]
-                
-    return json.dumps(total_ccf_results)
+
+    with open('../tmp/total_ccf_results.json', 'w') as f:
+        json.dump(total_ccf_results, f)
+    return total_ccf_results
     
 
 if __name__ == "__main__":
@@ -110,7 +110,8 @@ if __name__ == "__main__":
     req_data = gen_req_data(start_time, end_time)
     
     # Generate data for analysis.
-    req_dict = json.loads(req_data)
+    req_dict = json.dumps(req_data)
+    req_dict = json.loads(req_dict)
     data = build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
     
     # Data normalization.

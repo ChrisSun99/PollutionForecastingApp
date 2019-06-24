@@ -23,7 +23,6 @@ if __name__ == '__main__':
     cur = db.cursor()                                   # Create a Cursor object to execute queries.
     
     # Select data from table using SQL query.
-    #cur.execute("SELECT * FROM beijing_cityhour")
     cursor = db.cursor(pymysql.cursors.DictCursor)
     cursor.execute("SELECT ptime, pm25, aqi FROM beijing_cityHour")
     result_set = cursor.fetchall()

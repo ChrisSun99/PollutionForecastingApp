@@ -10,7 +10,10 @@ import sys
 
 sys.path.append('../')
 
+<<<<<<< Updated upstream:trash/get_raw_data_and_normalize.py
+=======
 from trash.extract_data_and_normalize import extract_implemented_data
+>>>>>>> Stashed changes:others/get_raw_data_and_normalize.py
 
 
 if __name__ == '__main__':
