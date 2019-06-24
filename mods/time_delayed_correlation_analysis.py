@@ -98,8 +98,8 @@ def time_delayed_correlation(half_range_len = 500):
                 peak_loc, peak_value = peak_loc_and_value([p[1] for p in cross_correlation_results])
                 total_ccf_results[columns[i]][columns[j]] = [peak_loc, peak_value]
 
-    with open('../tmp/total_ccf_results.json', 'w') as f:
-        json.dump(total_ccf_results, f)
+    # with open('../tmp/total_ccf_results.json', 'w') as f:
+    #     json.dump(total_ccf_results, f)
     return total_ccf_results
     
 
