@@ -12,7 +12,7 @@ import sys
 sys.path.append('../')
 
 from bin.app import *
-from mods import build_samples
+from mods.build_samples import build_data_frame_for_correlation_analysis
 
 
 def api_get(path, data):
@@ -45,20 +45,20 @@ def api_correlation(req_dict):
 
 class Test(object):
     def setup(self):
-        # 通用函数
         starttime = '2017010101'
         endtime = '2017010123'
-        self.data = build_samples.build_data_frame_for_correlation_analysis(starttime, endtime)
+        self.data = build_data_frame_for_correlation_analysis(starttime, endtime)
 
     def test_api_hello(self):
         res = api_hello({})
-        assert_equals(res['code'], 0)
-        assert_equals(res['message'], 'test successfully')
+        assert_equal(res['code'], 0)
+        assert_equal(res['message'], 'test successfully')
 
     def test_api_correlation(self):
+        """测试相关系数计算接口计算是否正常"""
         res = api_correlation(self.data)
-        assert_equals(res['code'], 0)
-        assert_equals(res['message'], "correlation correct.")
+        assert_equal(res['code'], 0)
+        assert_equal(res['message'], "correlation correct.")
 
     def test_correlation_format(self):
         result_dict = json.loads(open('../tmp/total_ccf_results.json', 'r'))
