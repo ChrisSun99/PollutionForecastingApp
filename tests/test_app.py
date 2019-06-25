@@ -45,9 +45,17 @@ def api_correlation(req_dict):
 
 class Test(object):
     def setup(self):
-        starttime = '2017010101'
-        endtime = '2017010123'
-        self.data = build_data_frame_for_correlation_analysis(starttime, endtime)
+        # 通用函数
+        self.d = []
+        with open("../tmp/taiyuan_cityHour.csv") as f:
+            records = csv.DictReader(f)
+            for row in records:
+                self.d.append(row)
+        self.dat = {}
+        self.dat.update({'data' : self.d})
+        with open('../tmp/data.json', 'w') as f:
+            json.dump(self.dat, f)
+        self.data = json.load(open('../tmp/data.json', 'rb'))
 
     def test_api_hello(self):
         res = api_hello({})
