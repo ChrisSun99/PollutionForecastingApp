@@ -7,7 +7,7 @@ import time
 import io
 from mods.config_loader import config
 from flask import Flask, request, jsonify, redirect, url_for
-from mods import time_delayed_correlation_analysis
+from mods.time_delayed_correlation_analysis import get_normalized_samples, time_delayed_correlation
 
 config.set_logging()
 
@@ -34,11 +34,13 @@ def correlation():
     print('<<<<<< starting correlation analysis, /correlation/')
 
     try:
-        data = json.loads(request.data)
-        print(data)
-        data = time_delayed_correlation_analysis.get_normalized_samples(data)
+        data = json.loads(request.data)['data']
+        
+        # TODO: 将data转为pd.DataFrame
+        
+        data = get_normalized_samples(data)
         time_start = time.time()
-        samples = time_delayed_correlation_analysis.time_delayed_correlation()
+        samples = time_delayed_correlation()
         _logger.info('time cost for correlation analysis: %s secs' % (time.time() - time_start))
         print('>>>>>> correlation SUCCEEDED')
         return json.dumps({'code': 0, 'message': 'correlation correct', 'data': samples})

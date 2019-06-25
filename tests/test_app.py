@@ -5,6 +5,7 @@ Created on 2019/6/7 19:14
 
 测试web服务接口
 """
+import pandas as pd
 from nose.tools import *
 import urllib
 import sys
@@ -46,16 +47,12 @@ def api_correlation(req_dict):
 class Test(object):
     def setup(self):
         # 通用函数
-        self.d = []
-        with open("../tmp/taiyuan_cityHour.csv") as f:
-            records = csv.DictReader(f)
-            for row in records:
-                self.d.append(row)
-        self.dat = {}
-        self.dat.update({'data' : self.d})
-        with open('../tmp/data.json', 'w') as f:
-            json.dump(self.dat, f)
-        self.data = json.load(open('../tmp/data.json', 'rb'))
+        data = pd.read_csv("../tmp/taiyuan_cityHour.csv")
+        self.data_list = []
+        for i in range(len(data)):
+            self.data_list.append(list(data.loc[i, :]))
+        self.data = {}
+        self.data.update({'data': self.data_list})
 
     def test_api_hello(self):
         res = api_hello({})
