@@ -28,7 +28,7 @@ def api_post(path, data):
     print('-' * 100)
     print('请求接口: ' + path)
     c = app.test_client()
-    response = c.post(path, json=data)
+    response = c.post(path, data)
     print(response.data)
     res_obj = json.loads(response.data.decode('utf-8'))
     return res_obj
@@ -62,7 +62,7 @@ class Test(object):
         assert_equals(res['message'], 'test successfully')
 
     def test_api_correlation(self):
-        res = api_correlation(self.data)
+        res = api_correlation(json.dumps(self.data))
         assert_equals(res['code'], 0)
         assert_equals(res['message'], "correlation correct.")
 
