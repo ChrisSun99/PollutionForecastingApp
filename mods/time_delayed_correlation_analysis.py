@@ -3,6 +3,7 @@
 时滞分析及相关性分析
 """
 import numpy as np
+import pandas as pd
 import sys
 import json
 
@@ -98,15 +99,15 @@ def time_delayed_correlation(half_range_len = 500):
                 peak_loc, peak_value = peak_loc_and_value([p[1] for p in cross_correlation_results])
                 total_ccf_results[columns[i]][columns[j]] = [peak_loc, peak_value]
 
-    # with open('../tmp/total_ccf_results.json', 'w') as f:
-    #     json.dump(total_ccf_results, f)
+    with open('../tmp/total_ccf_results1.json', 'w') as f:
+        json.dump(total_ccf_results, f)
     return total_ccf_results
     
 
 if __name__ == "__main__":
     # Generate fake req data.
     start_time = '2017010101'
-    end_time = '2017123123'
+    end_time = '2018123123'
     req_data = gen_req_data(start_time, end_time)
     
     # Generate data for analysis.

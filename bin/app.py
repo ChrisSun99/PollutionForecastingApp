@@ -11,9 +11,11 @@ from mods import time_delayed_correlation_analysis
 config.set_logging()
 
 import logging
+
 _logger = logging.getLogger(__name__)
 
 from flask import Flask, request
+
 app = Flask(__name__)
 
 
@@ -53,7 +55,7 @@ def hello_world():
     return json.dumps({'code': 0, 'message': 'test successfully', 'data': 'Hello World!'})
 
 
-@app.route('/correlation/')
+@app.route('/correlation/', methods=['POST'])
 def correlation():
     """
     进行相关性检验
@@ -63,9 +65,17 @@ def correlation():
     try:
         data = json.loads(request.data)
         data = time_delayed_correlation_analysis.get_normalized_samples(data)
-
+        time_start = time.time()
         samples = time_delayed_correlation_analysis.time_delayed_correlation()
+        _logger.info('time cost for correlation analysis: %s secs' % (time.time() - time_start))
+        print('>>>>>> correlation SUCCEEDED')
+        return json.dumps({'code': 0, 'message': 'correlation correct', 'data': samples})
+
+    except Exception as e:
+        _logger.exception(e)
+        print('>>>>>> correlation FAILED')
+        return json.dumps({'code': 1, 'message': 'correlation failed', 'data': 'Null'})
 
 
 if __name__ == '__main__':
-    app.run(debug=False)  # app.run(host, port, debug, options)
+    app.run(host = '0.0.0.0', port = 8000, debug = False)  # app.run(host, port, debug, options)
