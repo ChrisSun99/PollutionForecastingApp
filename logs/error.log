@@ -145,3 +145,102 @@ Traceback (most recent call last):
   File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/time_delayed_correlation_analysis.py", line 19, in get_normalized_samples
     data.drop(['ptime', 'time_stamp'], axis = 1, inplace = True)
 AttributeError: 'list' object has no attribute 'drop'
+2019-06-25 17:53:20 - ERROR - bin.app[line:47]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 37, in correlation
+    data = json.loads(request.data)['data']
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 17:54:55 - ERROR - bin.app[line:46]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 36, in correlation
+    data = json.loads(request.data)['data']
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 18:05:32 - ERROR - bin.app[line:46]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 36, in correlation
+    data = json.loads(request.data)['data']
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 18:16:17 - ERROR - bin.app[line:47]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 37, in correlation
+    data = json.loads(request.data)['data']
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 18:21:35 - ERROR - bin.app[line:47]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 37, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 18:22:04 - ERROR - bin.app[line:47]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 37, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 18:24:49 - ERROR - bin.app[line:46]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 36, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 18:25:39 - ERROR - bin.app[line:47]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 37, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 18:26:32 - ERROR - bin.app[line:47]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 37, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

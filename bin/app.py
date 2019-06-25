@@ -1,7 +1,6 @@
 #!flask/bin/python
 import json
 import pandas as pd
-from io import StringIO
 import csv
 import time
 import io
@@ -34,16 +33,10 @@ def correlation():
     print('<<<<<< starting correlation analysis, /correlation/')
 
     try:
-        data = json.loads(request.data)['data']
-<<<<<<< HEAD
+        print(type(request.data))
+        data = json.loads(request.data)
         data = pd.DataFrame(data)
-        data = time_delayed_correlation_analysis.get_normalized_samples(data)
-=======
-        
-        # TODO: 将data转为pd.DataFrame
-        
         data = get_normalized_samples(data)
->>>>>>> 2a242a4660a8827bf305d5158c0f1634eb34742e
         time_start = time.time()
         samples = time_delayed_correlation()
         _logger.info('time cost for correlation analysis: %s secs' % (time.time() - time_start))
