@@ -1,17 +1,16 @@
-from nose.tools import *
-import pandas as pd
-import json
-import csv
-
+# -*- coding: utf-8 -*-
 """
-测试用的web服务接口
+Created on 2019/6/7 19:14
+@author: luolei
+
+测试web服务接口
 """
 from nose.tools import *
 import urllib
 import sys
-import unittest
 
 sys.path.append('../')
+
 from bin.app import *
 from mods import build_samples
 
@@ -30,7 +29,7 @@ def api_post(path, data):
     print('-' * 100)
     print('请求接口: ' + path)
     c = app.test_client()
-    response = c.post(path, json=data)
+    response = c.post(path, json = data)
     print(response.data)
     res_obj = json.loads(response.data.decode('utf-8'))
     return res_obj
