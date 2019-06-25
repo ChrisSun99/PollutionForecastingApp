@@ -1,7 +1,4 @@
-from nose.tools import *
-import pandas as pd
-import json
-import csv
+
 
 """
 测试用的web服务接口
@@ -10,6 +7,7 @@ from nose.tools import *
 import urllib
 import sys
 import unittest
+import csv
 
 sys.path.append('../')
 from bin.app import *
@@ -46,10 +44,14 @@ def api_correlation(req_dict):
 
 class Test(object):
     def setup(self):
-        # 通用函数
-        starttime = '2017010101'
-        endtime = '2017010123'
-        self.data = build_samples.build_data_frame_for_correlation_analysis(starttime, endtime)
+        #通用函数
+        self.d = []
+        with open("../tmp/taiyuan_cityHour.csv") as f:
+            records = csv.DictReader(f)
+            for row in records:
+                self.d.append(row)
+        self.data = {}
+        self.data.update({'data' : self.d})
 
     def test_api_hello(self):
         res = api_hello({})
@@ -61,29 +63,38 @@ class Test(object):
         assert_equals(res['code'], 0)
         assert_equals(res['message'], "correlation correct.")
 
-    def test_correlation_format(self):
+    def test_api_correlation_format(self):
         result_dict = json.loads(open('../tmp/total_ccf_results.json', 'r'))
         assert_is_instance(result_dict, dict)
-        assert_equals(result_dict['aqi'], [0, 1.0])
-        assert_equals(result_dict['co'][0], 500)
-        assert_equals(result_dict['grade'][0], 500)
-        assert_equals(result_dict['no2'][0], 502)
-        assert_equals(result_dict['o3'][0], 0)
-        assert_equals(result_dict['o3H8'], [500, 0])
-        assert_equals(result_dict['pm10'][0], 500)
-        assert_equals(result_dict['pm25'][0], 500)
-        assert_equals(result_dict['sd'][0], 501)
-        assert_equals(result_dict['so2'][0], 500)
-        assert_equals(result_dict['temp'], [500, 0])
-        assert_equals(result_dict['ws'], [500, 0])
-        assert_equals(result_dict['weather_1'][0], 499)
-        assert_equals(result_dict['weather_2'], 503)
-        assert_equals(result_dict['weather_3'], 500)
-        assert_equals(result_dict['weather_4'], 1000)
-        assert_equals(result_dict['weather_5'], 996)
-        assert result_dict['weather_6'][0] < 400
-        assert result_dict['weather_7'][0] > 700
-        assert result_dict['weather_8'][0] == 90
+        assert_is_instance(result_dict['aqi'], dict)
+        aqi_dict = result_dict['aqi']
+        assert_equals(aqi_dict['aqi'], [0, 1.0])
+        assert_equals(aqi_dict['co'][0], 500)
+        assert_equals(aqi_dict['grade'][0], 500)
+        assert_equals(aqi_dict['no2'][0], 502)
+        assert_equals(aqi_dict['o3'][0], 0)
+        assert_equals(aqi_dict['o3H8'], [500, 0])
+        assert_equals(aqi_dict['pm10'][0], 500)
+        assert_equals(aqi_dict['pm25'][0], 500)
+        assert_equals(aqi_dict['sd'][0], 501)
+        assert_equals(aqi_dict['so2'][0], 500)
+        assert_equals(aqi_dict['temp'], [500, 0])
+        assert_equals(aqi_dict['ws'], [500, 0])
+        assert_equals(aqi_dict['weather_1'][0], 499)
+        assert_equals(aqi_dict['weather_2'], 503)
+        assert_equals(aqi_dict['weather_3'], 500)
+        assert_equals(aqi_dict['weather_4'], 1000)
+        assert_equals(aqi_dict['weather_5'], 996)
+        assert aqi_dict['weather_6'][0] < 400
+        assert aqi_dict['weather_7'][0] > 700
+        assert aqi_dict['weather_8'][0] == 90
+        assert aqi_dict['weather_9'][0] < 80
+        assert aqi_dict['weather_10'] == [500, 0]
+        assert aqi_dict['weather_11'][0] < 80
+        assert aqi_dict['weather_12'][0] < 80
+        assert aqi_dict['weather_13'][0] < 600
+        assert aqi_dict['weather_14'] == [500, 0]
+        assert aqi_dict['wd'] == [500, 0]
 
 
 if __name__ == "__main__":
@@ -91,3 +102,4 @@ if __name__ == "__main__":
     test.setup()
     test.test_api_hello()
     test.test_api_correlation()
+    test.test_api_correlation_format()
