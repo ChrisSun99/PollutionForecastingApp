@@ -44,7 +44,7 @@ def api_correlation(req_dict):
 
 class Test(object):
     def setup(self):
-        #通用函数
+        # 通用函数
         self.d = []
         with open("../tmp/taiyuan_cityHour.csv") as f:
             records = csv.DictReader(f)
@@ -62,7 +62,7 @@ class Test(object):
         assert_equals(res['message'], 'test successfully')
 
     def test_api_correlation(self):
-        res = api_correlation(json.dumps(self.data))
+        res = api_correlation(self.data)
         assert_equals(res['code'], 0)
         assert_equals(res['message'], "correlation correct.")
 
