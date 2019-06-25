@@ -50,8 +50,11 @@ class Test(object):
             records = csv.DictReader(f)
             for row in records:
                 self.d.append(row)
-        self.data = {}
-        self.data.update({'data' : self.d})
+        self.dat = {}
+        self.dat.update({'data' : self.d})
+        with open('../tmp/data.json', 'w') as f:
+            json.dump(self.dat, f)
+        self.data = json.load(open('../tmp/data.json', 'rb'))
 
     def test_api_hello(self):
         res = api_hello({})
