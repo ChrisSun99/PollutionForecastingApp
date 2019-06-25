@@ -20,3 +20,79 @@ Traceback (most recent call last):
   File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
     raise JSONDecodeError("Expecting value", s, err.value) from None
 json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 16:57:53 - ERROR - bin.app[line:75]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 66, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 17:07:54 - ERROR - bin.app[line:75]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 66, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 17:10:06 - ERROR - bin.app[line:76]: 'bytes' object has no attribute 'copy'
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 68, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/time_delayed_correlation_analysis.py", line 18, in get_normalized_samples
+    data = data.copy()
+AttributeError: 'bytes' object has no attribute 'copy'
+2019-06-25 17:10:57 - ERROR - bin.app[line:77]: 'bytes' object has no attribute 'copy'
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 69, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/time_delayed_correlation_analysis.py", line 18, in get_normalized_samples
+    data = data.copy()
+AttributeError: 'bytes' object has no attribute 'copy'
+2019-06-25 17:13:34 - ERROR - bin.app[line:79]: 'bytes' object has no attribute 'copy'
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 71, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/time_delayed_correlation_analysis.py", line 18, in get_normalized_samples
+    data = data.copy()
+AttributeError: 'bytes' object has no attribute 'copy'
+2019-06-25 17:14:23 - ERROR - bin.app[line:79]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 69, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 17:24:50 - ERROR - bin.app[line:78]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 68, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 17:25:38 - ERROR - bin.app[line:78]: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 68, in correlation
+    data = json.loads(request.data)
+  File "/Users/apple/anaconda3/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
