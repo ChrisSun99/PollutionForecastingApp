@@ -101,3 +101,52 @@ Traceback (most recent call last):
   File "/Users/apple/anaconda3/lib/python3.6/json/decoder.py", line 357, in raw_decode
     raise JSONDecodeError("Expecting value", s, err.value) from None
 json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2019-06-25 17:34:26 - ERROR - bin.app[line:47]: 'dict' object has no attribute 'drop'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 39, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/time_delayed_correlation_analysis.py", line 19, in get_normalized_samples
+    data.drop(['ptime', 'time_stamp'], axis = 1, inplace = True)
+AttributeError: 'dict' object has no attribute 'drop'
+2019-06-25 17:40:47 - ERROR - bin.app[line:46]: 'dict' object has no attribute 'drop'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 38, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/time_delayed_correlation_analysis.py", line 19, in get_normalized_samples
+    data.drop(['ptime', 'time_stamp'], axis = 1, inplace = True)
+AttributeError: 'dict' object has no attribute 'drop'
+2019-06-25 17:43:58 - ERROR - bin.app[line:46]: 'dict' object has no attribute 'drop'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 38, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/time_delayed_correlation_analysis.py", line 19, in get_normalized_samples
+    data.drop(['ptime', 'time_stamp'], axis = 1, inplace = True)
+AttributeError: 'dict' object has no attribute 'drop'
+2019-06-25 17:45:22 - ERROR - bin.app[line:47]: 'dict' object has no attribute 'drop'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 39, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/time_delayed_correlation_analysis.py", line 19, in get_normalized_samples
+    data.drop(['ptime', 'time_stamp'], axis = 1, inplace = True)
+AttributeError: 'dict' object has no attribute 'drop'
+2019-06-25 17:45:54 - ERROR - bin.app[line:47]: 'dict' object has no attribute 'drop'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 39, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/time_delayed_correlation_analysis.py", line 19, in get_normalized_samples
+    data.drop(['ptime', 'time_stamp'], axis = 1, inplace = True)
+AttributeError: 'dict' object has no attribute 'drop'
+2019-06-25 17:46:22 - ERROR - bin.app[line:47]: 'dict' object has no attribute 'drop'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 39, in correlation
+    data = time_delayed_correlation_analysis.get_normalized_samples(data)
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/time_delayed_correlation_analysis.py", line 19, in get_normalized_samples
+    data.drop(['ptime', 'time_stamp'], axis = 1, inplace = True)
+AttributeError: 'dict' object has no attribute 'drop'
+2019-06-25 17:47:54 - ERROR - bin.app[line:47]: 'list' object has no attribute 'drop'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 39, in correlation
+    data = get_normalized_samples(data['data'])
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/time_delayed_correlation_analysis.py", line 19, in get_normalized_samples
+    data.drop(['ptime', 'time_stamp'], axis = 1, inplace = True)
+AttributeError: 'list' object has no attribute 'drop'
