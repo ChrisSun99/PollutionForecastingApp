@@ -6,8 +6,7 @@ import csv
 import time
 import ast
 from mods.config_loader import config
-from flask import Flask, request, jsonify, redirect, url_for
-from mods.time_delayed_correlation_analysis import get_normalized_samples, time_delayed_correlation
+from mods.time_delayed_correlation_analysis import gen_req_data, get_normalized_samples, time_delayed_correlation
 from mods import build_samples
 config.set_logging()
 
@@ -36,8 +35,11 @@ def correlation():
     try:
         data = json.loads(request.data)['data']
         time_start = time.time()
-        data = build_samples.build_data_frame_for_correlation_analysis(data['starttime'], data['endtime'])
-        data = get_normalized_samples(data)
+        req_data = gen_req_data(data['starttime'], data['endtime'])
+        req_dict = json.dumps(req_data)
+        req_dict = json.loads(req_dict)
+        df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+        data = get_normalized_samples(df)
         samples = time_delayed_correlation(data)
         _logger.info('time cost for correlation analysis: %s secs' % (time.time() - time_start))
         print('>>>>>> correlation SUCCEEDED')

@@ -1069,3 +1069,326 @@ NameError: name 'data' is not defined
 2019-06-26 14:40:14 - INFO - bin.app[line:42]: time cost for correlation analysis: 22.625230073928833 secs
 2019-06-26 14:42:59 - INFO - bin.app[line:42]: time cost for correlation analysis: 21.997573852539062 secs
 2019-06-26 14:43:11 - INFO - bin.app[line:42]: time cost for correlation analysis: 20.134690046310425 secs
+2019-06-26 14:59:06 - ERROR - root[line:2053]: Line magic function `%Y` not found.
+2019-06-26 15:12:20 - ERROR - bin.app[line:47]: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['2016112215', '2018051922']' at line 1")
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 39, in correlation
+    data = build_samples.build_data_frame_for_correlation_analysis(data['starttime'], data['endtime'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 32, in build_data_frame_for_correlation_analysis
+    data = pull_data_from_db(db_config, start_time, end_time)
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/pull_data_from_db.py", line 36, in pull_data_from_db
+    """.format(start_time, end_time))
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/cursors.py", line 328, in _query
+    conn.query(q)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 732, in _read_query_result
+    result.read()
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['2016112215', '2018051922']' at line 1")
+2019-06-26 15:12:33 - ERROR - bin.app[line:47]: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['2018022821', '2018041722']' at line 1")
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 39, in correlation
+    data = build_samples.build_data_frame_for_correlation_analysis(data['starttime'], data['endtime'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 32, in build_data_frame_for_correlation_analysis
+    data = pull_data_from_db(db_config, start_time, end_time)
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/pull_data_from_db.py", line 36, in pull_data_from_db
+    """.format(start_time, end_time))
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/cursors.py", line 328, in _query
+    conn.query(q)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 732, in _read_query_result
+    result.read()
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['2018022821', '2018041722']' at line 1")
+2019-06-26 15:13:01 - ERROR - bin.app[line:47]: 'ptime'
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2657, in get_loc
+    return self._engine.get_loc(key)
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 39, in correlation
+    data = build_samples.build_data_frame_for_correlation_analysis(data['starttime'], data['endtime'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 35, in build_data_frame_for_correlation_analysis
+    data['time_stamp'] = data.loc[:, 'ptime'].apply(
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1494, in __getitem__
+    return self._getitem_tuple(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 868, in _getitem_tuple
+    return self._getitem_lowerdim(tup)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 988, in _getitem_lowerdim
+    section = self._getitem_axis(key, axis=i)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1913, in _getitem_axis
+    return self._get_label(key, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 141, in _get_label
+    return self.obj._xs(label, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py", line 3576, in xs
+    return self[key]
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py", line 2927, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2659, in get_loc
+    return self._engine.get_loc(self._maybe_cast_indexer(key))
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+2019-06-26 15:14:49 - ERROR - bin.app[line:47]: 'ptime'
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2657, in get_loc
+    return self._engine.get_loc(key)
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 39, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(data['starttime'], data['endtime'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 35, in build_data_frame_for_correlation_analysis
+    data['time_stamp'] = data.loc[:, 'ptime'].apply(
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1494, in __getitem__
+    return self._getitem_tuple(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 868, in _getitem_tuple
+    return self._getitem_lowerdim(tup)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 988, in _getitem_lowerdim
+    section = self._getitem_axis(key, axis=i)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1913, in _getitem_axis
+    return self._get_label(key, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 141, in _get_label
+    return self.obj._xs(label, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py", line 3576, in xs
+    return self[key]
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py", line 2927, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2659, in get_loc
+    return self._engine.get_loc(self._maybe_cast_indexer(key))
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+2019-06-26 15:18:04 - ERROR - bin.app[line:49]: 'ptime'
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2657, in get_loc
+    return self._engine.get_loc(key)
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 41, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 35, in build_data_frame_for_correlation_analysis
+    data['time_stamp'] = data.loc[:, 'ptime'].apply(
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1494, in __getitem__
+    return self._getitem_tuple(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 868, in _getitem_tuple
+    return self._getitem_lowerdim(tup)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 988, in _getitem_lowerdim
+    section = self._getitem_axis(key, axis=i)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1913, in _getitem_axis
+    return self._get_label(key, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 141, in _get_label
+    return self.obj._xs(label, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py", line 3576, in xs
+    return self[key]
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py", line 2927, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2659, in get_loc
+    return self._engine.get_loc(self._maybe_cast_indexer(key))
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+2019-06-26 15:20:23 - INFO - werkzeug[line:87]:  * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
+2019-06-26 15:20:23 - INFO - werkzeug[line:87]:  * Restarting with stat
+2019-06-26 15:20:26 - WARNING - werkzeug[line:87]:  * Debugger is active!
+2019-06-26 15:20:26 - INFO - werkzeug[line:87]:  * Debugger PIN: 170-211-701
+2019-06-26 15:20:46 - ERROR - bin.app[line:50]: 'ptime'
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2657, in get_loc
+    return self._engine.get_loc(key)
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 42, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 35, in build_data_frame_for_correlation_analysis
+    data['time_stamp'] = data.loc[:, 'ptime'].apply(
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1494, in __getitem__
+    return self._getitem_tuple(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 868, in _getitem_tuple
+    return self._getitem_lowerdim(tup)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 988, in _getitem_lowerdim
+    section = self._getitem_axis(key, axis=i)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1913, in _getitem_axis
+    return self._get_label(key, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 141, in _get_label
+    return self.obj._xs(label, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py", line 3576, in xs
+    return self[key]
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py", line 2927, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2659, in get_loc
+    return self._engine.get_loc(self._maybe_cast_indexer(key))
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+2019-06-26 15:21:09 - ERROR - bin.app[line:50]: 'ptime'
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2657, in get_loc
+    return self._engine.get_loc(key)
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 42, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 35, in build_data_frame_for_correlation_analysis
+    data['time_stamp'] = data.loc[:, 'ptime'].apply(
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1494, in __getitem__
+    return self._getitem_tuple(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 868, in _getitem_tuple
+    return self._getitem_lowerdim(tup)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 988, in _getitem_lowerdim
+    section = self._getitem_axis(key, axis=i)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1913, in _getitem_axis
+    return self._get_label(key, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 141, in _get_label
+    return self.obj._xs(label, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py", line 3576, in xs
+    return self[key]
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py", line 2927, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2659, in get_loc
+    return self._engine.get_loc(self._maybe_cast_indexer(key))
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+2019-06-26 15:21:30 - ERROR - bin.app[line:50]: 'ptime'
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2657, in get_loc
+    return self._engine.get_loc(key)
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 42, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 35, in build_data_frame_for_correlation_analysis
+    data['time_stamp'] = data.loc[:, 'ptime'].apply(
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1494, in __getitem__
+    return self._getitem_tuple(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 868, in _getitem_tuple
+    return self._getitem_lowerdim(tup)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 988, in _getitem_lowerdim
+    section = self._getitem_axis(key, axis=i)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1913, in _getitem_axis
+    return self._get_label(key, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 141, in _get_label
+    return self.obj._xs(label, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py", line 3576, in xs
+    return self[key]
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py", line 2927, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2659, in get_loc
+    return self._engine.get_loc(self._maybe_cast_indexer(key))
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+2019-06-26 15:22:20 - ERROR - bin.app[line:50]: 'ptime'
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2657, in get_loc
+    return self._engine.get_loc(key)
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 42, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 35, in build_data_frame_for_correlation_analysis
+    data['time_stamp'] = data.loc[:, 'ptime'].apply(
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1494, in __getitem__
+    return self._getitem_tuple(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 868, in _getitem_tuple
+    return self._getitem_lowerdim(tup)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 988, in _getitem_lowerdim
+    section = self._getitem_axis(key, axis=i)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 1913, in _getitem_axis
+    return self._get_label(key, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py", line 141, in _get_label
+    return self.obj._xs(label, axis=axis)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py", line 3576, in xs
+    return self[key]
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py", line 2927, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py", line 2659, in get_loc
+    return self._engine.get_loc(self._maybe_cast_indexer(key))
+  File "pandas/_libs/index.pyx", line 108, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 132, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1601, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1608, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'ptime'
+2019-06-26 15:30:48 - INFO - bin.app[line:45]: time cost for correlation analysis: 290.4885051250458 secs
+2019-06-26 15:38:16 - INFO - bin.app[line:44]: time cost for correlation analysis: 307.8300609588623 secs
