@@ -109,7 +109,7 @@ class Test(object):
         with open('../tmp/total_ccf_results.json', 'r') as f:
             result_dict = json.load(f)
 
-            # 测试数据类型
+            # 测试数据类型及数据大小范围
             assert_is_instance(result_dict, dict)
             not_visited_keys = []
             for key in result_dict.keys():
@@ -120,9 +120,10 @@ class Test(object):
                     for not_visited_key in not_visited_keys:
                         assert_is_instance(result_dict[key][not_visited_key], list)
                         assert_equal(len(result_dict[key][not_visited_key]), 2)
+                        assert_greater(result_dict[key][not_visited_key][0], 0)
+                        assert_greater(result_dict[key][not_visited_key][1], 0)
                         not_visited_keys.remove(not_visited_key)
 
-            # 测试数据大小范围
             key_list = result_dict.keys()
             assert_less(['aqi', 'co', 'grade', 'no2', 'no2Ici',
                          'o3', 'o3H8', 'o3Ici', 'pm10', 'pm10Ici', 'pm25', 'pm25Ici', 'pp', 'ptime', 'so2',
@@ -141,25 +142,7 @@ class Test(object):
 
             assert_equal(len(flattened_dict), add(result_dict))
 
-            # assert_equal(result_dict[key]['co'][0], 500)
-            # assert_equal(result_dict[key]['grade'][0], 500)
-            # assert_equal(result_dict[key]['no2'][0], 502)
-            # assert_equal(result_dict[key]['o3'], [500, 0])
-            # assert_equal(result_dict[key]['o3H8'], [500, 0])
-            # assert_equal(result_dict[key]['pm10'][0], 500)
-            # assert_equal(result_dict[key]['pm25'][0], 500)
-            # assert_equal(result_dict[key]['sd'][0], 501)
-            # assert_equal(result_dict[key]['so2'][0], 500)
-            # assert_equal(result_dict[key]['temp'], [500, 0])
-            # assert_equal(result_dict[key]['ws'], [500, 0])
-            # assert_equal(result_dict[key]['weather_1'][0], 499)
-            # assert_equal(result_dict[key]['weather_2'][0], 503)
-            # assert_equal(result_dict[key]['weather_3'][0], 500)
-            # assert_equal(result_dict[key]['weather_4'][0], 1000)
-            # assert_equal(result_dict[key]['weather_5'][0], 996)
-            # assert result_dict[key]['weather_6'][0] < 400
-            # assert result_dict[key]['weather_7'][0] > 700
-            # assert result_dict[key]['weather_8'][0] == 90
+
 
 
 if __name__ == "__main__":
