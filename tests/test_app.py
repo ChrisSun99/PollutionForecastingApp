@@ -81,6 +81,7 @@ def flatten(d, parent_key = '', sep = '_'):
             items.append((new_key, v))
     return dict(items)
 
+
 class Test(object):
     def setup(self):
         # 通用函数
@@ -117,24 +118,27 @@ class Test(object):
                 assert_is_instance(result_dict[key], dict)
                 if key in not_visited_keys:
                     for not_visited_key in not_visited_keys:
+                        assert_is_instance(result_dict[key][not_visited_key], list)
                         assert_equal(len(result_dict[key][not_visited_key]), 2)
                         not_visited_keys.remove(not_visited_key)
 
             # 测试数据大小范围
             key_list = result_dict.keys()
-            assert_less(['aqi','co','grade','no2','no2Ici',
-                                               'o3','o3H8','o3Ici','pm10','pm10Ici','pm25','pm25Ici','pp','ptime','so2',
-                                                'so2Ici','sd','temp','wd','weather_1','ws'], list(key_list))
+            assert_less(['aqi', 'co', 'grade', 'no2', 'no2Ici',
+                         'o3', 'o3H8', 'o3Ici', 'pm10', 'pm10Ici', 'pm25', 'pm25Ici', 'pp', 'ptime', 'so2',
+                         'so2Ici', 'sd', 'temp', 'wd', 'weather_1', 'ws'], list(key_list))
             for key in key_list:
                 assert len(result_dict[key]) <= len(key_list)
                 assert len(result_dict[key]) >= 1
 
             flattened_dict = flatten(result_dict)
+
             def add(x):
                 sum = len(x)
                 for i in range(len(x)):
                     sum += i
                 return sum
+
             assert_equal(len(flattened_dict), add(result_dict))
 
             # assert_equal(result_dict[key]['co'][0], 500)
