@@ -1,15 +1,15 @@
 # pymysql parameters
-#db_config:
-#    host: "localhost"  # your host
-#    user: "root"       # username
-#    passwd: "Smt19990513!"     # password
-#    db: "sample_db"   # name of the database
-
 db_config:
     host: "localhost"  # your host
     user: "root"       # username
-    passwd: "m31428571"     # password
+    passwd: "Smt19990513!"     # password
     db: "sample_db"   # name of the database
+
+#db_config:
+#    host: "localhost"  # your host
+#    user: "root"       # username
+#    passwd: "m31428571"     # password
+#    db: "sample_db"   # name of the database
 
 
 # model params

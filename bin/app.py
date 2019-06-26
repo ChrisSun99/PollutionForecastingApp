@@ -1,13 +1,14 @@
 #!flask/bin/python
 import json
 import pandas as pd
+from io import StringIO
 import csv
 import time
-import io
+import ast
 from mods.config_loader import config
 from flask import Flask, request, jsonify, redirect, url_for
 from mods.time_delayed_correlation_analysis import get_normalized_samples, time_delayed_correlation
-
+from mods import build_samples
 config.set_logging()
 
 import logging
@@ -33,12 +34,11 @@ def correlation():
     print('<<<<<< starting correlation analysis, /correlation/')
 
     try:
-        print(type(request.data))
-        data = json.loads(request.data)
-        data = pd.DataFrame(data)
-        data = get_normalized_samples(data)
+        data = json.loads(request.data)['data']
         time_start = time.time()
-        samples = time_delayed_correlation()
+        data = build_samples.build_data_frame_for_correlation_analysis(data['starttime'], data['endtime'])
+        data = get_normalized_samples(data)
+        samples = time_delayed_correlation(data)
         _logger.info('time cost for correlation analysis: %s secs' % (time.time() - time_start))
         print('>>>>>> correlation SUCCEEDED')
         return json.dumps({'code': 0, 'message': 'correlation correct', 'data': samples})
@@ -50,4 +50,4 @@ def correlation():
 
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 8000, debug = False)  # app.run(host, port, debug, options)
+    app.run(host = '0.0.0.0', port = 8000, debug = True)  # app.run(host, port, debug, options)

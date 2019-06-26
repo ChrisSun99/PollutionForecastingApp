@@ -77,7 +77,7 @@ def ccf(series_a, series_b, d):
     return numerator / (denominator + eps)
 
 
-def time_delayed_correlation(half_range_len = 500):
+def time_delayed_correlation(data, half_range_len = 500):
     """各变量间时滞检测和对应的相关系数值计算"""
     total_ccf_results = {}
     columns = list(data.columns)
@@ -102,7 +102,7 @@ def time_delayed_correlation(half_range_len = 500):
     with open('../tmp/total_ccf_results1.json', 'w') as f:
         json.dump(total_ccf_results, f)
     return total_ccf_results
-    
+
 
 if __name__ == "__main__":
     # Generate fake req data.
@@ -119,4 +119,4 @@ if __name__ == "__main__":
     data = get_normalized_samples(data)
     
     # Correlation analysis.
-    total_ccf_results = time_delayed_correlation()
+    total_ccf_results = time_delayed_correlation(data)
