@@ -1392,3 +1392,27 @@ Traceback (most recent call last):
 KeyError: 'ptime'
 2019-06-26 15:30:48 - INFO - bin.app[line:45]: time cost for correlation analysis: 290.4885051250458 secs
 2019-06-26 15:38:16 - INFO - bin.app[line:44]: time cost for correlation analysis: 307.8300609588623 secs
+2019-06-26 15:50:28 - ERROR - bin.app[line:49]: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 41, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/build_samples.py", line 32, in build_data_frame_for_correlation_analysis
+    data = pull_data_from_db(db_config, start_time, end_time)
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/pull_data_from_db.py", line 25, in pull_data_from_db
+    db = db_config['db'])                # name of the database
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/connections.py", line 599, in connect
+    self._request_authentication()
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/connections.py", line 861, in _request_authentication
+    auth_packet = self._read_packet()
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+2019-06-26 15:58:10 - INFO - bin.app[line:44]: time cost for correlation analysis: 444.6465950012207 secs

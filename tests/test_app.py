@@ -60,7 +60,7 @@ def random_date(start, end):
 
 def gen_starttime_endtime(start, end):
     """
-
+    生成测试的起始和结束时间
     :return: list of starttime and endtime
     """
     d1 = datetime.strptime(start, '%Y%m%d%H')
@@ -92,7 +92,7 @@ class Test(object):
         with open('../tmp/total_ccf_results.json', 'r') as f:
             result_dict = json.load(f)
             assert_is_instance(result_dict, dict)
-            assert_equal(result_dict['aqi']['aqi'], [0, 1.0])
+            assert_list_equal(result_dict['aqi']['aqi'], [0, 1.0])
             assert_equal(result_dict['aqi']['co'][0], 500)
             assert_equal(result_dict['aqi']['grade'][0], 500)
             assert_equal(result_dict['aqi']['no2'][0], 502)
