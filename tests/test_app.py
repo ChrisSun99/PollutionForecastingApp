@@ -13,6 +13,7 @@ from nose.tools import *
 from nose.tools import assert_equal, assert_almost_equal
 import urllib
 import sys
+import collections
 
 sys.path.append('../')
 
@@ -70,6 +71,16 @@ def gen_starttime_endtime(start, end):
     return [starttime.strftime('%Y%m%d%H'), endtime.strftime('%Y%m%d%H')]
 
 
+def flatten(d, parent_key = '', sep = '_'):
+    items = []
+    for k, v in d.items():
+        new_key = parent_key + sep + k if parent_key else k
+        if isinstance(v, collections.MutableMapping):
+            items.extend(flatten(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
+
 class Test(object):
     def setup(self):
         # 通用函数
@@ -89,34 +100,67 @@ class Test(object):
         assert_equal(res['message'], "correlation correct")
 
     def test_correlation_format(self):
+        """
+        测试数据类型、数据形状、数据大小范围
+        转置数据，重新比较测试相关性
+        :return:
+        """
         with open('../tmp/total_ccf_results.json', 'r') as f:
             result_dict = json.load(f)
+
+            # 测试数据类型
             assert_is_instance(result_dict, dict)
-            assert_equal(result_dict['aqi']['aqi'], [0, 1.0])
-            assert_equal(result_dict['aqi']['co'][0], 500)
-            assert_equal(result_dict['aqi']['grade'][0], 500)
-            assert_equal(result_dict['aqi']['no2'][0], 502)
-            assert_equal(result_dict['aqi']['o3'], [500, 0])
-            assert_equal(result_dict['aqi']['o3H8'], [500, 0])
-            assert_equal(result_dict['aqi']['pm10'][0], 500)
-            assert_equal(result_dict['aqi']['pm25'][0], 500)
-            assert_equal(result_dict['aqi']['sd'][0], 501)
-            assert_equal(result_dict['aqi']['so2'][0], 500)
-            assert_equal(result_dict['aqi']['temp'], [500, 0])
-            assert_equal(result_dict['aqi']['ws'], [500, 0])
-            assert_equal(result_dict['aqi']['weather_1'][0], 499)
-            assert_equal(result_dict['aqi']['weather_2'][0], 503)
-            assert_equal(result_dict['aqi']['weather_3'][0], 500)
-            assert_equal(result_dict['aqi']['weather_4'][0], 1000)
-            assert_equal(result_dict['aqi']['weather_5'][0], 996)
-            assert result_dict['aqi']['weather_6'][0] < 400
-            assert result_dict['aqi']['weather_7'][0] > 700
-            assert result_dict['aqi']['weather_8'][0] == 90
+            not_visited_keys = []
+            for key in result_dict.keys():
+                not_visited_keys.append(key)
+            for key in result_dict.keys():
+                assert_is_instance(result_dict[key], dict)
+                if key in not_visited_keys:
+                    for not_visited_key in not_visited_keys:
+                        assert_equal(len(result_dict[key][not_visited_key]), 2)
+                        not_visited_keys.remove(not_visited_key)
+
+            # 测试数据大小范围
+            key_list = result_dict.keys()
+            assert_less(['aqi','co','grade','no2','no2Ici',
+                                               'o3','o3H8','o3Ici','pm10','pm10Ici','pm25','pm25Ici','pp','ptime','so2',
+                                                'so2Ici','sd','temp','wd','weather_1','ws'], list(key_list))
+            for key in key_list:
+                assert len(result_dict[key]) <= len(key_list)
+                assert len(result_dict[key]) >= 1
+
+            flattened_dict = flatten(result_dict)
+            def add(x):
+                sum = len(x)
+                for i in range(len(x)):
+                    sum += i
+                return sum
+            assert_equal(len(flattened_dict), add(result_dict))
+
+            # assert_equal(result_dict[key]['co'][0], 500)
+            # assert_equal(result_dict[key]['grade'][0], 500)
+            # assert_equal(result_dict[key]['no2'][0], 502)
+            # assert_equal(result_dict[key]['o3'], [500, 0])
+            # assert_equal(result_dict[key]['o3H8'], [500, 0])
+            # assert_equal(result_dict[key]['pm10'][0], 500)
+            # assert_equal(result_dict[key]['pm25'][0], 500)
+            # assert_equal(result_dict[key]['sd'][0], 501)
+            # assert_equal(result_dict[key]['so2'][0], 500)
+            # assert_equal(result_dict[key]['temp'], [500, 0])
+            # assert_equal(result_dict[key]['ws'], [500, 0])
+            # assert_equal(result_dict[key]['weather_1'][0], 499)
+            # assert_equal(result_dict[key]['weather_2'][0], 503)
+            # assert_equal(result_dict[key]['weather_3'][0], 500)
+            # assert_equal(result_dict[key]['weather_4'][0], 1000)
+            # assert_equal(result_dict[key]['weather_5'][0], 996)
+            # assert result_dict[key]['weather_6'][0] < 400
+            # assert result_dict[key]['weather_7'][0] > 700
+            # assert result_dict[key]['weather_8'][0] == 90
 
 
 if __name__ == "__main__":
     test = Test()
-    test.setup()
-    test.test_api_hello()
-    test.test_api_correlation()
+    # test.setup()
+    # test.test_api_hello()
+    # test.test_api_correlation()
     test.test_correlation_format()
