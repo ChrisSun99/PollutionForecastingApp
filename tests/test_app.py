@@ -61,7 +61,7 @@ def random_date(start, end):
 
 def gen_starttime_endtime(start, end):
     """
-
+    生成测试的起始和结束时间
     :return: list of starttime and endtime
     """
     d1 = datetime.strptime(start, '%Y%m%d%H')
@@ -118,6 +118,7 @@ class Test(object):
         with open('../tmp/total_ccf_results.json', 'r') as f:
             result_dict = json.load(f)
             assert_is_instance(result_dict, dict)
+<<<<<<< HEAD
             not_visited_keys = []
             for key in result_dict.keys():
                 not_visited_keys.append(key)
@@ -148,6 +149,28 @@ class Test(object):
                 return sum
 
             assert_equal(len(flattened_dict), add(result_dict))
+=======
+            assert_list_equal(result_dict['aqi']['aqi'], [0, 1.0])
+            assert_equal(result_dict['aqi']['co'][0], 500)
+            assert_equal(result_dict['aqi']['grade'][0], 500)
+            assert_equal(result_dict['aqi']['no2'][0], 502)
+            assert_equal(result_dict['aqi']['o3'], [500, 0])
+            assert_equal(result_dict['aqi']['o3H8'], [500, 0])
+            assert_equal(result_dict['aqi']['pm10'][0], 500)
+            assert_equal(result_dict['aqi']['pm25'][0], 500)
+            assert_equal(result_dict['aqi']['sd'][0], 501)
+            assert_equal(result_dict['aqi']['so2'][0], 500)
+            assert_equal(result_dict['aqi']['temp'], [500, 0])
+            assert_equal(result_dict['aqi']['ws'], [500, 0])
+            assert_equal(result_dict['aqi']['weather_1'][0], 499)
+            assert_equal(result_dict['aqi']['weather_2'][0], 503)
+            assert_equal(result_dict['aqi']['weather_3'][0], 500)
+            assert_equal(result_dict['aqi']['weather_4'][0], 1000)
+            assert_equal(result_dict['aqi']['weather_5'][0], 996)
+            assert result_dict['aqi']['weather_6'][0] < 400
+            assert result_dict['aqi']['weather_7'][0] > 700
+            assert result_dict['aqi']['weather_8'][0] == 90
+>>>>>>> d71debc66198f91ab0b1fb6830ed0ffddc628813
 
 
 if __name__ == "__main__":
