@@ -85,7 +85,9 @@ def flatten(d, parent_key = '', sep = '_'):
 class Test(object):
     def setup(self):
         # 通用函数
-        time_list = gen_starttime_endtime('2016010101', '2019010101')
+        self.earliest = '2016010101'
+        self.latest = '2019010101'
+        time_list = gen_starttime_endtime(self.earliest, self.latest)
         request_dict = {'data': {'starttime': time_list[0], 'endtime': time_list[1]}}
         self.data = request_dict
 
@@ -113,12 +115,14 @@ class Test(object):
         assert_equal(list(self.data['data'].keys()), ['starttime', 'endtime'])
         assert_is_instance(self.data['data']['starttime'], str)
         assert_is_instance(self.data['data']['endtime'], str)
+        assert int(self.earliest) < int(self.data['data']['starttime'])
+        assert int(self.latest) > int(self.data['data']['endtime'])
+        assert int(self.data['data']['endtime']) > int(self.data['data']['starttime'])
 
         # 测试返回数据数据类型及数据大小范围
         with open('../tmp/total_ccf_results.json', 'r') as f:
             result_dict = json.load(f)
             assert_is_instance(result_dict, dict)
-<<<<<<< HEAD
             not_visited_keys = []
             for key in result_dict.keys():
                 not_visited_keys.append(key)
@@ -149,28 +153,6 @@ class Test(object):
                 return sum
 
             assert_equal(len(flattened_dict), add(result_dict))
-=======
-            assert_list_equal(result_dict['aqi']['aqi'], [0, 1.0])
-            assert_equal(result_dict['aqi']['co'][0], 500)
-            assert_equal(result_dict['aqi']['grade'][0], 500)
-            assert_equal(result_dict['aqi']['no2'][0], 502)
-            assert_equal(result_dict['aqi']['o3'], [500, 0])
-            assert_equal(result_dict['aqi']['o3H8'], [500, 0])
-            assert_equal(result_dict['aqi']['pm10'][0], 500)
-            assert_equal(result_dict['aqi']['pm25'][0], 500)
-            assert_equal(result_dict['aqi']['sd'][0], 501)
-            assert_equal(result_dict['aqi']['so2'][0], 500)
-            assert_equal(result_dict['aqi']['temp'], [500, 0])
-            assert_equal(result_dict['aqi']['ws'], [500, 0])
-            assert_equal(result_dict['aqi']['weather_1'][0], 499)
-            assert_equal(result_dict['aqi']['weather_2'][0], 503)
-            assert_equal(result_dict['aqi']['weather_3'][0], 500)
-            assert_equal(result_dict['aqi']['weather_4'][0], 1000)
-            assert_equal(result_dict['aqi']['weather_5'][0], 996)
-            assert result_dict['aqi']['weather_6'][0] < 400
-            assert result_dict['aqi']['weather_7'][0] > 700
-            assert result_dict['aqi']['weather_8'][0] == 90
->>>>>>> d71debc66198f91ab0b1fb6830ed0ffddc628813
 
 
 if __name__ == "__main__":

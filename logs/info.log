@@ -1416,3 +1416,55 @@ Traceback (most recent call last):
     raise errorclass(errno, errval)
 pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
 2019-06-26 15:58:10 - INFO - bin.app[line:44]: time cost for correlation analysis: 444.6465950012207 secs
+2019-06-27 11:22:27 - ERROR - bin.app[line:49]: (2003, "Can't connect to MySQL server on 'localhost' ([Errno 61] Connection refused)")
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 583, in connect
+    **kwargs)
+  File "/Users/apple/anaconda3/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/Users/apple/anaconda3/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 41, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 32, in build_data_frame_for_correlation_analysis
+    data = pull_data_from_db(db_config, start_time, end_time)
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/pull_data_from_db.py", line 25, in pull_data_from_db
+    db = db_config['db'])                # name of the database
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'localhost' ([Errno 61] Connection refused)")
+2019-06-27 11:23:13 - ERROR - bin.app[line:49]: (2003, "Can't connect to MySQL server on 'localhost' ([Errno 61] Connection refused)")
+Traceback (most recent call last):
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 583, in connect
+    **kwargs)
+  File "/Users/apple/anaconda3/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/Users/apple/anaconda3/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/bin/app.py", line 41, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/build_samples.py", line 32, in build_data_frame_for_correlation_analysis
+    data = pull_data_from_db(db_config, start_time, end_time)
+  File "/Users/apple/Desktop/pollution_statistic_forecast_app-develop_lstm/mods/pull_data_from_db.py", line 25, in pull_data_from_db
+    db = db_config['db'])                # name of the database
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'localhost' ([Errno 61] Connection refused)")
