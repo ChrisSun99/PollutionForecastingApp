@@ -14,9 +14,9 @@ from nose.tools import assert_equal, assert_almost_equal
 import urllib
 import sys
 import collections
+from _collections_abc import dict_keys
 
 sys.path.append('../')
-
 from bin.app import *
 
 
@@ -106,10 +106,17 @@ class Test(object):
         转置数据，重新比较测试相关性
         :return:
         """
+        # 测试请求数据格式
+        assert_is_instance(self.data, dict)
+        assert_is_instance(self.data['data'], dict)
+        assert len(self.data['data']) == 2
+        assert_equal(list(self.data['data'].keys()), ['starttime', 'endtime'])
+        assert_is_instance(self.data['data']['starttime'], str)
+        assert_is_instance(self.data['data']['endtime'], str)
+
+        # 测试返回数据数据类型及数据大小范围
         with open('../tmp/total_ccf_results.json', 'r') as f:
             result_dict = json.load(f)
-
-            # 测试数据类型及数据大小范围
             assert_is_instance(result_dict, dict)
             not_visited_keys = []
             for key in result_dict.keys():
@@ -120,8 +127,8 @@ class Test(object):
                     for not_visited_key in not_visited_keys:
                         assert_is_instance(result_dict[key][not_visited_key], list)
                         assert_equal(len(result_dict[key][not_visited_key]), 2)
-                        assert_greater(result_dict[key][not_visited_key][0], 0)
-                        assert_greater(result_dict[key][not_visited_key][1], 0)
+                        assert result_dict[key][not_visited_key][0] >= 0
+                        assert result_dict[key][not_visited_key][1] >= 0
                         not_visited_keys.remove(not_visited_key)
 
             key_list = result_dict.keys()
@@ -143,11 +150,9 @@ class Test(object):
             assert_equal(len(flattened_dict), add(result_dict))
 
 
-
-
 if __name__ == "__main__":
     test = Test()
-    # test.setup()
+    test.setup()
     # test.test_api_hello()
     # test.test_api_correlation()
     test.test_correlation_format()
