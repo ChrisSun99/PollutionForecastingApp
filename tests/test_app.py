@@ -158,6 +158,6 @@ class Test(object):
 if __name__ == "__main__":
     test = Test()
     test.setup()
-    # test.test_api_hello()
-    # test.test_api_correlation()
+    test.test_api_hello()
+    test.test_api_correlation()
     test.test_correlation_format()
