@@ -87,8 +87,9 @@ class Test(object):
         # 通用函数
         self.earliest = '2016010101'
         self.latest = '2019010101'
+        half_range_len = 50
         time_list = gen_starttime_endtime(self.earliest, self.latest)
-        request_dict = {'data': {'starttime': time_list[0], 'endtime': time_list[1]}}
+        request_dict = {'data': {'start_time': time_list[0], 'end_time': time_list[1], 'half_range_len': half_range_len}}
         self.data = request_dict
 
     def test_api_hello(self):
@@ -111,13 +112,12 @@ class Test(object):
         # 测试请求数据格式
         assert_is_instance(self.data, dict)
         assert_is_instance(self.data['data'], dict)
-        assert len(self.data['data']) == 2
-        assert_equal(list(self.data['data'].keys()), ['starttime', 'endtime'])
-        assert_is_instance(self.data['data']['starttime'], str)
-        assert_is_instance(self.data['data']['endtime'], str)
-        assert int(self.earliest) < int(self.data['data']['starttime'])
-        assert int(self.latest) > int(self.data['data']['endtime'])
-        assert int(self.data['data']['endtime']) > int(self.data['data']['starttime'])
+        assert_set_equal(set(list(self.data['data'].keys())), {'start_time', 'end_time', 'half_range_len'})
+        assert_is_instance(self.data['data']['start_time'], str)
+        assert_is_instance(self.data['data']['end_time'], str)
+        assert_less(int(self.earliest), int(self.data['data']['start_time']))
+        assert_greater(int(self.latest), int(self.data['data']['end_time']))
+        assert_greater(int(self.data['data']['end_time']), int(self.data['data']['start_time']))
 
         # 测试返回数据数据类型及数据大小范围
         with open('../tmp/total_ccf_results.json', 'r') as f:
@@ -132,8 +132,8 @@ class Test(object):
                     for not_visited_key in not_visited_keys:
                         assert_is_instance(result_dict[key][not_visited_key], list)
                         assert_equal(len(result_dict[key][not_visited_key]), 2)
-                        assert result_dict[key][not_visited_key][0] >= 0
-                        assert result_dict[key][not_visited_key][1] >= 0
+                        assert_greater_equal(result_dict[key][not_visited_key][0], 0)
+                        assert_greater_equal(result_dict[key][not_visited_key][1], 0)
                         not_visited_keys.remove(not_visited_key)
 
             key_list = result_dict.keys()
@@ -141,8 +141,8 @@ class Test(object):
                          'o3', 'o3H8', 'o3Ici', 'pm10', 'pm10Ici', 'pm25', 'pm25Ici', 'pp', 'ptime', 'so2',
                          'so2Ici', 'sd', 'temp', 'wd', 'weather_1', 'ws'], list(key_list))
             for key in key_list:
-                assert len(result_dict[key]) <= len(key_list)
-                assert len(result_dict[key]) >= 1
+                assert_less_equal(len(result_dict[key]), len(key_list))
+                assert_greater_equal(len(result_dict[key]), 1)
 
             flattened_dict = flatten(result_dict)
 

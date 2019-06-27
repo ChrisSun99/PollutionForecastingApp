@@ -1468,3 +1468,43 @@ Traceback (most recent call last):
   File "/Users/apple/anaconda3/lib/python3.6/site-packages/pymysql/connections.py", line 630, in connect
     raise exc
 pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'localhost' ([Errno 61] Connection refused)")
+2019-06-27 14:20:41 - ERROR - bin.app[line:49]: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 41, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/build_samples.py", line 32, in build_data_frame_for_correlation_analysis
+    data = pull_data_from_db(db_config, start_time, end_time)
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/mods/pull_data_from_db.py", line 25, in pull_data_from_db
+    db = db_config['db'])                # name of the database
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/connections.py", line 325, in __init__
+    self.connect()
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/connections.py", line 599, in connect
+    self._request_authentication()
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/connections.py", line 861, in _request_authentication
+    auth_packet = self._read_packet()
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Applications/anaconda3/lib/python3.7/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+2019-06-27 14:24:59 - INFO - bin.app[line:44]: time cost for correlation analysis: 245.59736394882202 secs
+2019-06-27 14:28:51 - ERROR - bin.app[line:50]: 'start_time'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 42, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+KeyError: 'start_time'
+2019-06-27 14:29:26 - ERROR - bin.app[line:50]: 'start_time'
+Traceback (most recent call last):
+  File "/Users/luolei/Documents/Git_Repository_Dreisteine/chrissun99_pollution_forcast/bin/app.py", line 42, in correlation
+    df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
+KeyError: 'start_time'
+2019-06-27 14:30:02 - INFO - bin.app[line:45]: time cost for correlation analysis: 9.046163320541382 secs
+2019-06-27 14:30:36 - INFO - bin.app[line:45]: time cost for correlation analysis: 9.380589962005615 secs
+2019-06-27 14:31:47 - INFO - bin.app[line:45]: time cost for correlation analysis: 58.336941719055176 secs
+2019-06-27 14:32:24 - INFO - bin.app[line:45]: time cost for correlation analysis: 4.531405925750732 secs
+2019-06-27 14:33:05 - INFO - bin.app[line:45]: time cost for correlation analysis: 12.157275199890137 secs
+2019-06-27 14:33:46 - INFO - bin.app[line:45]: time cost for correlation analysis: 4.66750693321228 secs

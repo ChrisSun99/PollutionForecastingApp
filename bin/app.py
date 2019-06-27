@@ -33,14 +33,15 @@ def correlation():
     print('<<<<<< starting correlation analysis, /correlation/')
 
     try:
-        data = json.loads(request.data)['data']
+        data = json.loads(request.data)
         time_start = time.time()
-        req_data = gen_req_data(data['starttime'], data['endtime'])
-        req_dict = json.dumps(req_data)
-        req_dict = json.loads(req_dict)
+        # req_data = gen_req_data(data['starttime'], data['endtime'])
+        # req_dict = json.dumps(req_data)
+        # req_dict = json.loads(req_dict)
+        req_dict = data['data']
         df = build_samples.build_data_frame_for_correlation_analysis(req_dict['start_time'], req_dict['end_time'])
         data = get_normalized_samples(df)
-        samples = time_delayed_correlation(data)
+        samples = time_delayed_correlation(data, req_dict['half_range_len'])
         _logger.info('time cost for correlation analysis: %s secs' % (time.time() - time_start))
         print('>>>>>> correlation SUCCEEDED')
         return json.dumps({'code': 0, 'message': 'correlation correct', 'data': samples})
